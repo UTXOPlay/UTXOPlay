@@ -29,7 +29,7 @@ Hosts provide optional `api/items` endpoints with display metadata, current acco
 6. Build the store image and switch the store only after all thirteen game pages, state endpoints and exports pass against the prepared services. Verify an existing online chess invitation, both player seats, SSE updates, both realtime games, item inventory and account separation. Do not point the new gateway at the old bare native ports: it expects the standalone game host.
 7. Keep the old images and deployment definition until acceptance completes. Roll back both service URLs and the store image together if needed. New chess room memberships after cutover live in the new database; reconcile those records before rolling back to a store-owned room writer.
 
-This change publishes source and deployment recipes. It does not deploy to production, migrate production databases, execute mainnet transactions or replace production runtime binaries.
+The initial source migration published these recipes without changing production. The subsequent authorized production cutover is recorded in [the 0.32.0 deployment report](deployment-independent-0.32.0.md). It retained the exact native binaries and did not execute mainnet transactions.
 
 ## Local integration
 

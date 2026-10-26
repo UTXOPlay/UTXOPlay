@@ -41,7 +41,7 @@ After building the game repositories as siblings, `npm run dev:platform` starts 
 
 Build the frontend and then `docker build -f deploy/Dockerfile -t utxoplay:0.32.0 .`. The image contains only the store. `deploy/compose.yml` connects it to the existing HTTPS proxy and the external `utxoplay-games` network. Build/start game images using each game's own deployment files. Preserve the existing store SQLite database, runtime account directories, signing authorities and matching native engine/verifier binaries.
 
-**Existing installations must follow [the migration guide](docs/game-decoupling.md), including copying online chess membership to its new database before switching services.** This repository migration does not restart or alter the public deployment.
+**Existing installations must follow [the migration guide](docs/game-decoupling.md), including copying online chess membership to its new database before switching services.** The production cutover and acceptance results are recorded in [the 0.32.0 deployment report](docs/deployment-independent-0.32.0.md).
 
 ## Wallets and commerce
 
