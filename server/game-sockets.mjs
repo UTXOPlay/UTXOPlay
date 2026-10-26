@@ -17,7 +17,7 @@ export function gameSockets({account,origin,limited,routes}) {
   wss.handleUpgrade(req,socket,head,client=>{
    const group=peers.get(user.id)||new Set();group.add(client);peers.set(user.id,group);
    const url=new URL(route.url);url.protocol=url.protocol==='https:'?'wss:':'ws:';
-   const upstream=new WebSocket(url,{headers:{'X-Runtime-Token':route.token,'X-UTXOPlay-Account':user.id},maxPayload:262144,perMessageDeflate:false,handshakeTimeout:5000});
+   const upstream=new WebSocket(url,{headers:{'X-Runtime-Token':route.token,'X-UTXOPlay-Account':user.id,'X-UTXOPlay-Authenticated':user.address?'wallet':'guest'},maxPayload:262144,perMessageDeflate:false,handshakeTimeout:5000});
    let windowStart=Date.now(),messages=0;client.alive=true;
    const valid=()=>account(req)?.id===user.id;
    const shutdown=()=>{client.terminate();upstream.terminate();};

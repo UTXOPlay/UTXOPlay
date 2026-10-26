@@ -1,6 +1,6 @@
 services:
   store:
-    image: utxoplay:0.32.0
+    image: utxoplay:0.34.0
     container_name: utxoplay-store
     restart: unless-stopped
     init: true
@@ -11,7 +11,8 @@ services:
       MYELIN_CHESS_URL: http://myelin-chess:8080
       MYELIN_SLING_URL: http://myelin-sling:8080
       MYELIN_TEEWORLDS_URL: http://myelin-teeworlds:8080
-      MYELIN_OPENSTRIKE_URL: http://myelin-openstrike:8080
+      MYELIN_BLOCK_PARTY_URL: http://myelin-block-party:8080
+      MYELIN_BOTSTRIKE_URL: http://myelin-botstrike:8080
       MYELIN_ARCADE_URL: http://myelin-arcade:8080
       MYELIN_NEON_MINER_URL: http://myelin-neon-miner:8080
       MYELIN_PRISM_BREAKER_URL: http://myelin-prism-breaker:8080

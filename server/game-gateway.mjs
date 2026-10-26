@@ -23,11 +23,11 @@ export function installGameGateway({app,services,account,needUser,limited,origin
   const user=account(req);
   const games=await Promise.all([...services].filter(([,service])=>service.items).map(async([id,service])=>{
    try{
-    const result=await runtimeFetch(service.url+'/games/'+id+'/api/items',{headers:user?{'X-Runtime-Token':service.token,'X-UTXOPlay-Account':user.id}:{},signal:AbortSignal.timeout(10000)});
+    const result=await runtimeFetch(service.url+'/games/'+id+'/api/items',{headers:user?{'X-Runtime-Token':service.token,'X-UTXOPlay-Account':user.id,'X-UTXOPlay-Authenticated':user.address?'wallet':'guest'}:{},signal:AbortSignal.timeout(10000)});
     if(!result.ok)throw Error('Inventory unavailable');
     const data=await result.json();
     if(!Array.isArray(data.items)||data.items.length>100)throw Error('Invalid item catalog');
-    return {id,balance:data.balance,items:data.items};
+    return {id,balance:data.balance,currency:typeof data.currency==='string'?data.currency.slice(0,20):'coins',items:data.items};
    }catch{return {id,error:'Inventory unavailable. Try again shortly.',items:[]};}
   }));
   res.set('Cache-Control','no-store').json({games});
@@ -43,7 +43,7 @@ export function installGameGateway({app,services,account,needUser,limited,origin
   let timer;const deadline=setTimeout(()=>controller.abort(),20000);deadline.unref();
   try{
    const result=await runtimeFetch(service.url+'/games/'+id+'/api'+endpoint,{
-    method:req.method,headers:{'Content-Type':'application/json','X-Runtime-Token':service.token,'X-UTXOPlay-Account':req.account.id},
+    method:req.method,headers:{'Content-Type':'application/json','X-Runtime-Token':service.token,'X-UTXOPlay-Account':req.account.id,'X-UTXOPlay-Authenticated':req.account.address?'wallet':'guest'},
     body:req.method==='POST'?JSON.stringify(req.body||{}):undefined,
     signal:controller.signal
    });
@@ -60,7 +60,7 @@ export function installGameGateway({app,services,account,needUser,limited,origin
    }
    const content=await result.text();
    if(result.ok){
-    const action=req.method==='POST'&&endpoint.endsWith('/action');
+    const action=req.method==='POST'&&(endpoint.endsWith('/action')||service.playActions?.includes(endpoint));
     if(action)recordActivity(req.account.id,id);
     if(service.recordReads&&req.method==='GET'&&endpoint==='/state'||action||req.method==='POST'&&['create','join'].includes(req.body?.type))recordPlay.run(req.account.id,id,Date.now(),req.method==='POST'?1:0);
     if(action){

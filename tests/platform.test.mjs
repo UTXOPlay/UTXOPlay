@@ -25,18 +25,18 @@ test('guest accounts are isolated and game proxy ignores injected account header
 test('wallet challenge is browser-bound, single use, persistent identity and revocable',async()=>{const challenge=await req('/api/auth/challenge',{address});const proof=await signer.signMessage(challenge.data.message);const payload={id:challenge.data.id,proof};assert.equal((await req('/api/auth/verify',payload)).status,401);const login=await req('/api/auth/verify',payload,challenge.cookie);assert.equal(login.status,200,JSON.stringify(login.data));assert.equal(login.data.user.address,address);assert.equal((await req('/api/auth/verify',payload,challenge.cookie)).status,401);assert.equal((await req('/api/me',undefined,login.cookie)).data.user.id,login.data.user.id);await req('/api/auth/logout',{},login.cookie);assert.equal((await req('/api/me',undefined,login.cookie)).data.user,null);const next=await req('/api/auth/challenge',{address});const again=await req('/api/auth/verify',{id:next.data.id,proof:await signer.signMessage(next.data.message)},next.cookie);assert.equal(again.data.user.id,login.data.user.id);});
 test('wrong origin, wrong address signature, and cross-account projects are rejected',async()=>{assert.equal((await req('/api/guest',{},'',{Origin:'https://evil.invalid'})).status,403);const challenge=await req('/api/auth/challenge',{address});assert.equal((await req('/api/auth/verify',{id:challenge.data.id,proof:await other.signMessage(challenge.data.message)},challenge.cookie)).status,401);const c=await req('/api/auth/challenge',{address});const login=await req('/api/auth/verify',{id:c.data.id,proof:await signer.signMessage(c.data.message)},c.cookie);assert.equal((await req('/api/developer/projects',{title:'My game',description:'A private draft',url:'https://example.com/game'},login.cookie)).status,201);assert.equal((await req('/api/developer/projects',undefined,login.cookie)).data.projects.length,1);const guest=await req('/api/guest',{});assert.equal((await req('/api/developer/projects',undefined,guest.cookie)).data.projects.length,0);assert.equal((await req('/api/developer/projects',{title:'My game',description:'bad',url:'javascript:alert(1)'},login.cookie)).status,400);});
 test('Teeworlds catalog and proxy use the dedicated runtime with authenticated identity',async()=>{
- const catalog=await req('/api/games');assert.equal(catalog.data.games.length,13);assert.equal(catalog.data.games.find(g=>g.id==='teeworlds').mode,'Online duel + practice');
+ const catalog=await req('/api/games');assert.equal(catalog.data.games.length,14);assert.equal(catalog.data.games.find(g=>g.id==='teeworlds').mode,'Online duel + practice');
  const guest=await req('/api/guest',{});const r=await req('/games/teeworlds/api/action',{type:'create',mode:'duel'},guest.cookie,{'X-UTXOPlay-Account':'f'.repeat(64)});assert.equal(r.status,200);
  const call=calls.at(-1);assert.equal(call.url,'http://127.0.0.1:8883/games/teeworlds/api/action');assert.equal(call.options.headers['X-UTXOPlay-Account'],guest.data.user.id);
  assert.equal((await req('/api/library',undefined,guest.cookie)).data.games[0].game,'teeworlds');
  assert.equal((await req('/games/teeworlds/api/action',{type:'create',mode:'duel'},guest.cookie,{Origin:'https://evil.invalid'})).status,403);
 });
 
-test('OpenStrike uses its own runtime and authenticated account',async()=>{
- const guest=await req('/api/guest',{});const r=await req('/games/openstrike/api/action',{type:'create',mode:'duel'},guest.cookie,{'X-UTXOPlay-Account':'f'.repeat(64)});assert.equal(r.status,200);
- const call=calls.at(-1);assert.equal(call.url,'http://127.0.0.1:8884/games/openstrike/api/action');assert.equal(call.options.headers['X-UTXOPlay-Account'],guest.data.user.id);
- assert.equal((await req('/api/library',undefined,guest.cookie)).data.games[0].game,'openstrike');
- assert.equal((await req('/games/openstrike/api/action',{type:'create',mode:'duel'},guest.cookie,{Origin:'https://evil.invalid'})).status,403);
+test('BotStrike uses its own runtime and authenticated account',async()=>{
+ const guest=await req('/api/guest',{});const r=await req('/games/botstrike/api/action',{type:'create',mode:'duel'},guest.cookie,{'X-UTXOPlay-Account':'f'.repeat(64)});assert.equal(r.status,200);
+ const call=calls.at(-1);assert.equal(call.url,'http://127.0.0.1:8890/games/botstrike/api/action');assert.equal(call.options.headers['X-UTXOPlay-Account'],guest.data.user.id);
+ assert.equal((await req('/api/library',undefined,guest.cookie)).data.games[0].game,'botstrike');
+ assert.equal((await req('/games/botstrike/api/action',{type:'create',mode:'duel'},guest.cookie,{Origin:'https://evil.invalid'})).status,403);
 });
 
 test('library polling coalesces writes but user actions update last played immediately',async()=>{

@@ -199,10 +199,10 @@
     "subtitle": "Free machines. Contested futures.",
     "genre": "Action",
     "mode": "Online 5v5 + solo",
-    "description": "A 2050 cyberpunk tactical FPS with six robot heroes, three distinct maps and 5v5 squads. Reboot in Team Deathmatch or buy weapons, escort the relay and defend two sites in Demolition. Solo bots, public matchmaking and private lobbies. Developed from the OpenStrike browser integration originally by Retric.",
+    "description": "A 2050 cyberpunk tactical FPS by Arthur Zhang, published by UTXOPlay Labs. Six robot heroes, three maps, 5v5 squads, 12 weapons and 12 equipment systems. Wield rail rifles, EMP carbines and plasma cannons; deploy repair swarms, recon beacons and overclock chips. Respawn in Deathmatch or fight tactical buy rounds in Relay Demolition.",
     "cover": "/assets/botstrike-keyart.webp",
     "version": "1.0.0",
-    "controls": "WASD move · mouse aim · click fire · Q hero skill · E plant/defuse · B armory · R reload · 1–5 weapons · Z/X/C utility · Space jump · Ctrl crouch · right-click scope · Tab scoreboard. Touch movement, drag-to-aim firing and skills are inside the arena.",
+    "controls": "WASD move · mouse aim · click fire · Q skill · E relay · B armory/loadout · R reload · 1–0 / − / = or mouse wheel weapons · Z/X/C throwables · G selected equipment · Space jump · Ctrl crouch · right-click scope · Tab scores. Touch movement, drag-to-aim firing, equipment and skills inside the arena.",
     "players": "1–10 players online",
     "headline": "Choose your chassis.|Own the next second.",
     "heroDescription": "2050. The city runs on stolen intelligence. Assemble five robots, breach the relay, and take back the network.",
@@ -217,7 +217,7 @@
       "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
     },
     "publisher": {
-      "name": "Arthur Zhang",
+      "name": "UTXOPlay Labs",
       "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
     },
     "presentation": {
@@ -225,15 +225,11 @@
       "tag": "CYBERPUNK / 2050",
       "length": "5v5 team matches",
       "input": "Keyboard + mouse / touch",
-      "note": "Six heroes. Three maps. Two ways to take the city.",
-      "repo": "myelin-openstrike"
+      "note": "Six chassis. Twelve weapons. Twelve field systems.",
+      "repo": "BotStrike"
     },
-    "sourceUrl": "https://github.com/UTXOPlay/myelin-openstrike",
-    "replayDescription": "Complete matches receive a signed native Myelin replay export. Team Deathmatch has four-second respawns; Demolition respawns each round. Disconnected seats are covered by AI. Historical OpenStrike exports retain their original verifier.",
-    "upstream": {
-      "name": "Retric",
-      "sourceUrl": "https://github.com/RetricSu/openstrike-fiber-arena"
-    }
+    "sourceUrl": "https://github.com/UTXOPlay/BotStrike",
+    "replayDescription": "Complete matches receive a signed native Myelin host replay export, bound to the exact BotStrike arsenal rules and engine. Deathmatch respawns after four seconds; Demolition respawns each round. Disconnected seats are covered by AI. Off-chain verification, not CKB settlement."
   },
   {
     "id": "teeworlds",
@@ -509,5 +505,43 @@
     },
     "sourceUrl": "https://github.com/UTXOPlay/myelin-atelier",
     "replayDescription": "Your progress saves as you play. Replay and export your session inside the game."
+  },
+  {
+    "id": "block-party",
+    "title": "BLOCK PARTY",
+    "subtitle": "Keep the lights on. Own the court.",
+    "genre": "Sports",
+    "mode": "Online 3v3 + solo",
+    "description": "Original hip-hop street basketball in Echo Harbor. Ten players, five positions, crew skill combinations and a cosmetic store. Play solo, queue with friends or host a private court. Your UTXOPlay wallet signs you in automatically.",
+    "cover": "/assets/block-party-lineup.png",
+    "version": "0.1.0",
+    "controls": "WASD moves · hold Space to shoot, tap to fake · Q pass/steal · E screen/guard · R signature · Shift sprint. Touch joystick and buttons are inside the court.",
+    "players": "1–6 players",
+    "headline": "Keep the lights on.|Own the court.",
+    "heroDescription": "Build your crew, find the extra pass and leave your mark on Echo Harbor. Street basketball with ten original players and a shared court.",
+    "caption": "BLOCK PARTY · ECHO HARBOR",
+    "myelin": {
+      "based": true,
+      "evidence": "host-replay",
+      "logo": "/assets/myelin-logo.png?v=0.7.1"
+    },
+    "developer": {
+      "name": "Arthur Zhang",
+      "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
+    },
+    "publisher": {
+      "name": "Arthur Zhang",
+      "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
+    },
+    "presentation": {
+      "accent": "#c5ff36",
+      "tag": "ECHO HARBOR",
+      "length": "4-minute games",
+      "input": "Keyboard + touch",
+      "note": "Ten players. Five positions. One shared court.",
+      "repo": "myelin-block-party"
+    },
+    "replayDescription": "Finished games and inventory have signed off-chain host replay exports. Live online matches continue while you leave; AI covers your seat until you return.",
+    "sourceStatus": "local"
   }
 ]

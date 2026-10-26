@@ -27,15 +27,6 @@
     "actionLimit": 1200,
     "repository": "myelin-teeworlds"
   },
-  "openstrike": {
-    "url": "http://127.0.0.1:8884",
-    "urlEnv": "MYELIN_OPENSTRIKE_URL",
-    "tokenEnv": "MYELIN_OPENSTRIKE_TOKEN",
-    "socket": true,
-    "recordReads": false,
-    "actionLimit": 1200,
-    "repository": "myelin-openstrike"
-  },
   "neon-coil": {
     "url": "http://127.0.0.1:8885",
     "urlEnv": "MYELIN_ARCADE_URL",
@@ -125,6 +116,19 @@
     "socket": true,
     "recordReads": false,
     "actionLimit": 1200,
-    "repository": "myelin-openstrike"
+    "repository": "BotStrike"
+  },
+  "block-party": {
+    "url": "http://127.0.0.1:8889",
+    "urlEnv": "MYELIN_BLOCK_PARTY_URL",
+    "tokenEnv": "MYELIN_BLOCK_PARTY_TOKEN",
+    "socket": true,
+    "recordReads": false,
+    "actionLimit": 1200,
+    "items": true,
+    "repository": "myelin-block-party",
+    "playActions": [
+      "/match/loaded"
+    ]
   }
 }

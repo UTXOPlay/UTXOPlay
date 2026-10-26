@@ -25,7 +25,7 @@ For a store-only instance with no curated services, set `GAME_SERVICES_FILE` to 
 | [myelin-chess](https://github.com/UTXOPlay/myelin-chess) | The Quiet Board, including online tables and Stockfish |
 | [myelin-sling](https://github.com/UTXOPlay/myelin-sling) | Skyward |
 | [myelin-teeworlds](https://github.com/UTXOPlay/myelin-teeworlds) | Teeworlds |
-| [myelin-openstrike](https://github.com/UTXOPlay/myelin-openstrike) | OpenStrike |
+| [BotStrike](https://github.com/UTXOPlay/BotStrike) | BotStrike |
 | [myelin-arcade](https://github.com/UTXOPlay/myelin-arcade) | Neon Coil, Starfall, Drift Run |
 | [myelin-neon-miner](https://github.com/UTXOPlay/myelin-neon-miner) | Neon Prospector |
 | [myelin-prism-breaker](https://github.com/UTXOPlay/myelin-prism-breaker) | Prism Breaker |

@@ -37,7 +37,7 @@ test('a game unknown to the store code works through configured asset, HTTP and 
  assert.equal((await f.req('/games/external/redirect')).status,502);
  assert.equal((await f.req('/games/unknown/')).status,404);
  assert.equal((await f.req('/games/external/api/state')).status,401);
- const state=await f.req('/games/external/api/state',undefined,a.cookie,{'X-UTXOPlay-Account':b.id,'X-Runtime-Token':'injected'});assert.equal((await state.json()).account,a.id);assert.equal(f.calls.at(-1).headers['x-runtime-token'],token);
+ const state=await f.req('/games/external/api/state',undefined,a.cookie,{'X-UTXOPlay-Account':b.id,'X-Runtime-Token':'injected','X-UTXOPlay-Authenticated':'wallet'});assert.equal((await state.json()).account,a.id);assert.equal(f.calls.at(-1).headers['x-runtime-token'],token);assert.equal(f.calls.at(-1).headers['x-utxoplay-authenticated'],'guest');
  assert.equal((await f.req('/games/external/api/action',{},a.cookie,{Origin:'http://evil.invalid'})).status,403);
  const anonItems=await f.req('/api/items');assert.equal((await anonItems.json()).games[0].balance,null);
  const items=await f.req('/api/items',undefined,a.cookie);assert.equal((await items.json()).games[0].balance,42);assert.equal(f.calls.at(-1).headers['x-utxoplay-account'],a.id);
@@ -52,8 +52,8 @@ test('SSE streams relay immediately and close when the store session is revoked'
 });
 test('WebSocket upgrades use authenticated identity, reject wrong origins, and revoke live sessions',async t=>{
  const f=await fixture(t),a=await guest(f);
- const ws=new WebSocket(f.base.replace('http','ws')+'/games/external/api/socket',{headers:{Origin:origin,Cookie:a.cookie,'X-UTXOPlay-Account':'f'.repeat(64)}});t.after(()=>ws.terminate());
- const first=await new Promise((resolve,reject)=>{ws.once('message',raw=>resolve(JSON.parse(raw)));ws.once('error',reject);});assert.equal(first.account,a.id);
+ const ws=new WebSocket(f.base.replace('http','ws')+'/games/external/api/socket',{headers:{Origin:origin,Cookie:a.cookie,'X-UTXOPlay-Account':'f'.repeat(64),'X-UTXOPlay-Authenticated':'wallet'}});t.after(()=>ws.terminate());
+ const first=await new Promise((resolve,reject)=>{ws.once('message',raw=>resolve(JSON.parse(raw)));ws.once('error',reject);});assert.equal(first.account,a.id);assert.equal(f.calls.at(-1).headers['x-utxoplay-authenticated'],'guest');
  const rejected=new WebSocket(f.base.replace('http','ws')+'/games/external/api/socket',{headers:{Origin:'https://evil.invalid',Cookie:a.cookie}});rejected.on('error',()=>{});
  assert.equal(await new Promise(r=>rejected.once('unexpected-response',(_req,res)=>{r(res.statusCode);res.resume();rejected.terminate();})),403);
  const closed=new Promise(resolve=>ws.once('close',resolve));await f.req('/api/auth/logout',{},a.cookie);
