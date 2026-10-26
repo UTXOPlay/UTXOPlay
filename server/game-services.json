@@ -117,5 +117,14 @@
     "recordReads": true,
     "actionLimit": 120,
     "repository": "myelin-atelier"
+  },
+  "botstrike": {
+    "url": "http://127.0.0.1:8890",
+    "urlEnv": "MYELIN_BOTSTRIKE_URL",
+    "tokenEnv": "MYELIN_BOTSTRIKE_TOKEN",
+    "socket": true,
+    "recordReads": false,
+    "actionLimit": 1200,
+    "repository": "myelin-openstrike"
   }
 }

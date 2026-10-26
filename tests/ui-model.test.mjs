@@ -7,7 +7,7 @@ test('search tolerates case and surrounding spaces while combining genre and pla
  assert.deepEqual(selectGames(games,{query:'  SKYward  ',genre:'Arcade',mode:'solo'}).map(g=>g.id),['sling']);
  assert.deepEqual(selectGames(games,{query:'skyward',genre:'Action'}),[]);
  assert.deepEqual(selectGames(games,{query:'skyward',mode:'friends'}),[]);
- assert.deepEqual(selectGames(games,{mode:'solo'}).map(g=>g.id),['neon-miner','prism-breaker','neon-coil','starfall','drift-run','openstrike','teeworlds','sling','chess','rune-foundry','lumen-weave','orbit-courier','mosslight']);
+ assert.deepEqual(selectGames(games,{mode:'solo'}).map(g=>g.id),['neon-miner','prism-breaker','neon-coil','starfall','drift-run','botstrike','teeworlds','sling','chess','rune-foundry','lumen-weave','orbit-courier','mosslight']);
  assert.deepEqual(selectGames(games,{genre:'Strategy',mode:'friends'}).map(g=>g.id),['chess']);
  assert.equal(selectGames(games,{query:'   '}).length,13);
  assert.equal(games.length,13);
@@ -35,21 +35,21 @@ test('catalog distinguishes original developers, ports and the publisher, and su
  const {ccc}=await import('@ckb-ccc/shell');const owner=ccc.ClientPublicMainnet.open();
  try {const parsed=await ccc.Address.fromString(address,owner.value);assert.ok(parsed.script);}finally{await owner.dispose();}
  for(const game of games)assert.deepEqual(game.publisher,{name:'Arthur Zhang',address});
- const openstrike=games.find(g=>g.id==='openstrike');
- assert.equal(openstrike.developer.name,'Retric');assert.equal(openstrike.developer.address,null);
+ const openstrike=games.find(g=>g.id==='botstrike');
+ assert.deepEqual(openstrike.developer,{name:'Arthur Zhang',address});assert.equal(openstrike.upstream.name,'Retric');assert.match(openstrike.upstream.sourceUrl,/RetricSu/);
  const tee=games.find(g=>g.id==='teeworlds');assert.match(tee.developer.name,/Magnus Auvinen/);assert.equal(tee.developer.address,null);
- for(const game of games.filter(g=>!['openstrike','teeworlds'].includes(g.id)))assert.deepEqual(game.developer,{name:'Arthur Zhang',address});
- for(const game of [openstrike,tee]){assert.deepEqual(game.portedBy,{name:'Arthur Zhang',address});assert.ok(game.developer.sourceUrl.startsWith('https://github.com/'));}
- assert.deepEqual(selectGames(games,{query:'  RETRIC '}).map(g=>g.id),['openstrike']);
+ for(const game of games.filter(g=>g.id!=='teeworlds'))assert.deepEqual(game.developer,{name:'Arthur Zhang',address});
+ for(const game of [tee]){assert.deepEqual(game.portedBy,{name:'Arthur Zhang',address});assert.ok(game.developer.sourceUrl.startsWith('https://github.com/'));}
+ assert.deepEqual(selectGames(games,{query:'  RETRIC '}).map(g=>g.id),['botstrike']);
  assert.equal(selectGames(games,{query:'Arthur Zhang'}).length,13);
 });
 
 test('creator collections use wallet identity and do not merge unknown or cross-publisher developer claims',async()=>{
  const {creatorCollection,creatorHref}=await import('../src/ui-model.mjs');
- assert.equal(creatorCollection(games,'publisher','openstrike').games.length,13);
- assert.equal(creatorCollection(games,'developer','sling').games.length,11);
- assert.deepEqual(creatorCollection(games,'developer','openstrike').games.map(g=>g.id),['openstrike']);
- assert.equal(creatorCollection(games,'portedBy','openstrike'),null);
+ assert.equal(creatorCollection(games,'publisher','botstrike').games.length,13);
+ assert.equal(creatorCollection(games,'developer','sling').games.length,12);
+ assert.equal(creatorCollection(games,'developer','botstrike').games.length,12);
+ assert.equal(creatorCollection(games,'portedBy','botstrike'),null);
  assert.equal(creatorCollection(games,'publisher','missing'),null);
  assert.equal(creatorHref({id:'unknown',developer:{name:'Not specified',address:null}},'developer'),null);
  const arthur=games[0].publisher.address;
@@ -62,7 +62,7 @@ test('creator collections use wallet identity and do not merge unknown or cross-
  const all=[...games,a,b,c,unknown1,unknown2];
  assert.deepEqual(creatorCollection(all,'publisher','a').games.map(g=>g.id),['a','c','unknown1','unknown2']);
  assert.deepEqual(creatorCollection(all,'developer','a').games.map(g=>g.id),['a','c']);
- assert.equal(creatorCollection(all,'developer','sling').games.length,11);
+ assert.equal(creatorCollection(all,'developer','sling').games.length,12);
  assert.deepEqual(creatorCollection(all,'developer','unknown1').games.map(g=>g.id),['unknown1']);
  assert.equal(creatorHref(games[0],'publisher'),'/creators/publisher/neon-miner');
 });
@@ -70,8 +70,8 @@ test('creator collections use wallet identity and do not merge unknown or cross-
 
 test('creator role navigation follows the same identity without crossing publisher claims',async()=>{
  const {creatorRoleLinks}=await import('../src/ui-model.mjs');
- assert.deepEqual(creatorRoleLinks(games,'publisher','openstrike').map(x=>[x.role,x.count]),[['developer',11],['publisher',13]]);
- assert.deepEqual(creatorRoleLinks(games,'developer','openstrike').map(x=>[x.role,x.count]),[['developer',1]]);
+ assert.deepEqual(creatorRoleLinks(games,'publisher','botstrike').map(x=>[x.role,x.count]),[['developer',12],['publisher',13]]);
+ assert.deepEqual(creatorRoleLinks(games,'developer','botstrike').map(x=>[x.role,x.count]),[['developer',12],['publisher',13]]);
  assert.deepEqual(creatorRoleLinks(games,'publisher','missing'),[]);
  const claim={id:'claim',vendor:true,developer:games[0].developer,publisher:{name:'Other publisher',address:'other-wallet'}};
  assert.deepEqual(creatorRoleLinks([...games,claim],'developer','claim').map(x=>x.role),['developer']);
@@ -85,7 +85,7 @@ test('collection search combines filters, sorts titles naturally and preserves s
  assert.deepEqual(filterCreatorGames(sample,{query:'  sector ',genre:'Arcade',freeOnly:true,sort:'az'}).map(g=>g.id),['a','z']);
  assert.deepEqual(filterCreatorGames(sample,{sort:'za'}).map(g=>g.id),['z','a','b']);
  assert.deepEqual(filterCreatorGames(sample,{genre:'Puzzle',freeOnly:true}),[]);
- assert.deepEqual(filterCreatorGames(games,{query:'Retric'}).map(g=>g.id),['openstrike']);
+ assert.deepEqual(filterCreatorGames(games,{query:'Retric'}).map(g=>g.id),['botstrike']);
  assert.deepEqual(filterCreatorGames(sample).map(g=>g.id),['z','a','b']);
  assert.deepEqual(sample,original);
 });

@@ -194,47 +194,46 @@
     "replayDescription": "Your progress saves as you play. Replay and export your session inside the game."
   },
   {
-    "id": "openstrike",
-    "title": "OpenStrike",
-    "subtitle": "One arena. One clean shot.",
+    "id": "botstrike",
+    "title": "BotStrike",
+    "subtitle": "Free machines. Contested futures.",
     "genre": "Action",
-    "mode": "Online duel + practice",
-    "description": "A sunlit harbor, charming robots and a clean first-person duel. Train at three difficulty levels or invite a friend. Original OpenStrike rules with native Myelin replay verification.",
-    "cover": "/assets/openstrike-listing.webp",
-    "version": "0.1.0",
-    "controls": "Choose Rookie, Standard or Veteran training, or invite a friend for a 90-second duel. WASD moves, mouse aims, click fires, Shift walks and R reloads. Escape opens the in-game menu. Touch controls, field of view and sensitivity are adjustable in Your setup.",
-    "players": "1–2 players online",
-    "headline": "One arena.|One clean shot.",
-    "heroDescription": "Find your angle in Neon Divide. A quick first-person duel, with every round ready to replay.",
-    "caption": "OPENSTRIKE · NEON DIVIDE",
+    "mode": "Online 5v5 + solo",
+    "description": "A 2050 cyberpunk tactical FPS with six robot heroes, three distinct maps and 5v5 squads. Reboot in Team Deathmatch or buy weapons, escort the relay and defend two sites in Demolition. Solo bots, public matchmaking and private lobbies. Developed from the OpenStrike browser integration originally by Retric.",
+    "cover": "/assets/botstrike-keyart.webp",
+    "version": "1.0.0",
+    "controls": "WASD move · mouse aim · click fire · Q hero skill · E plant/defuse · B armory · R reload · 1–5 weapons · Z/X/C utility · Space jump · Ctrl crouch · right-click scope · Tab scoreboard. Touch movement, drag-to-aim firing and skills are inside the arena.",
+    "players": "1–10 players online",
+    "headline": "Choose your chassis.|Own the next second.",
+    "heroDescription": "2050. The city runs on stolen intelligence. Assemble five robots, breach the relay, and take back the network.",
+    "caption": "BOTSTRIKE · 2050",
     "myelin": {
       "based": true,
       "evidence": "host-replay",
       "logo": "/assets/myelin-logo.png?v=0.7.1"
     },
     "developer": {
-      "name": "Retric",
-      "address": null,
-      "sourceUrl": "https://github.com/RetricSu/openstrike-fiber-arena"
+      "name": "Arthur Zhang",
+      "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
     },
     "publisher": {
       "name": "Arthur Zhang",
       "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
     },
-    "portedBy": {
-      "name": "Arthur Zhang",
-      "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
-    },
     "presentation": {
-      "accent": "#69b7ad",
-      "tag": "SUNLIT HARBOR",
-      "length": "90-second rounds",
+      "accent": "#68e8ff",
+      "tag": "CYBERPUNK / 2050",
+      "length": "5v5 team matches",
       "input": "Keyboard + mouse / touch",
-      "note": "Three training levels. A sunny harbor. One clean shot.",
+      "note": "Six heroes. Three maps. Two ways to take the city.",
       "repo": "myelin-openstrike"
     },
     "sourceUrl": "https://github.com/UTXOPlay/myelin-openstrike",
-    "replayDescription": "Completed rounds are replayed and saved to your account. Live rounds continue if you leave the page. Download your verified export after a match."
+    "replayDescription": "Complete matches receive a signed native Myelin replay export. Team Deathmatch has four-second respawns; Demolition respawns each round. Disconnected seats are covered by AI. Historical OpenStrike exports retain their original verifier.",
+    "upstream": {
+      "name": "Retric",
+      "sourceUrl": "https://github.com/RetricSu/openstrike-fiber-arena"
+    }
   },
   {
     "id": "teeworlds",
