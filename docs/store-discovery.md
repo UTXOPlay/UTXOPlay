@@ -18,3 +18,9 @@ The store adopts the progressive information disclosure pattern while keeping pr
 `npm test` passes 65 tests, including deck coverage, uniqueness, vendor exclusion, repeated-first prevention and varying starts. `npm run build` passes. `tests/store-discovery-browser.mjs` checks a complete 14-game cycle, refresh behavior, stable hero during filtering, hover without layout shifts, keyboard/Escape/dialog behavior, preserved credits and touch details. Layout checks cover 1920×1080, 2560×1080, 2560×1440, 3840×2160, 390×844 and 844×390, with no horizontal overflow and 44px launch targets.
 
 This is a store-only presentation release. No game runtime, database schema or saved rule/profile changes are required. Back up SQLite with its online backup API, retain the previous store image/Compose definition, and recreate only `store` with `--no-deps`. Rollback uses the previous store Compose definition with current shared data.
+
+## Production acceptance
+
+Implementation `15ca710` is deployed as `utxoplay:0.35.0-15ca710` at `/data/utxoplay/releases/20261026-discovery-0.35.0-15ca710`. The store is healthy. Public HTML and entry JS/CSS match the local build by SHA-256, and all 14 curated games remain listed. The full browser checks passed again against public HTTPS, including all six viewports; results are in `docs/acceptance/store-discovery.json`. A previously established disposable guest session survived the rollout and the new compact launch icon successfully opened BotStrike through the ready iframe handshake.
+
+All 21 other running containers retained their IDs and images. The verified online SQLite backup is `/data/utxoplay/backups/platform-before-discovery-0.35.0-15ca710.sqlite`. The previous store Compose definition is `/data/utxoplay/releases/20261026-botstrike-0.34.0/store.compose.json`; recreate only its store service under project `utxoplay` to roll back, preserving current shared data.

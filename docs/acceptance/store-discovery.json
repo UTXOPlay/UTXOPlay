@@ -1,0 +1,64 @@
+{
+  "base": "https://store.utxoplay.io",
+  "deckSize": 14,
+  "randomizedCycle": true,
+  "refreshAvoidsRepeat": true,
+  "hoverFocusTouch": true,
+  "errors": [],
+  "layouts": [
+    {
+      "viewportWidth": 1920,
+      "viewportHeight": 1080,
+      "overflow": false,
+      "columns": 5,
+      "width": 266,
+      "height": 220.5,
+      "controls": true
+    },
+    {
+      "viewportWidth": 2560,
+      "viewportHeight": 1080,
+      "overflow": false,
+      "columns": 5,
+      "width": 266,
+      "height": 220.5,
+      "controls": true
+    },
+    {
+      "viewportWidth": 2560,
+      "viewportHeight": 1440,
+      "overflow": false,
+      "columns": 5,
+      "width": 266,
+      "height": 220.5,
+      "controls": true
+    },
+    {
+      "viewportWidth": 3840,
+      "viewportHeight": 2160,
+      "overflow": false,
+      "columns": 5,
+      "width": 266,
+      "height": 220.5,
+      "controls": true
+    },
+    {
+      "viewportWidth": 390,
+      "viewportHeight": 844,
+      "overflow": false,
+      "columns": 2,
+      "width": 171,
+      "height": 175.0625,
+      "controls": true
+    },
+    {
+      "viewportWidth": 844,
+      "viewportHeight": 390,
+      "overflow": false,
+      "columns": 2,
+      "width": 309,
+      "height": 244.6875,
+      "controls": true
+    }
+  ]
+}
