@@ -25,5 +25,5 @@ test('credit review reports additions and removals independently of payment fiel
  ['developerName','Old studio','New studio'],['developerAddress','old-wallet',''],['developerSourceUrl','','https://example.com/']]);
  assert.deepEqual(creditChanges(null,draft),[]);
  assert.deepEqual(missingCreditNames({developerName:'  ',publisherName:''}),['developerName','publisherName']);
- assert.deepEqual(missingCreditNames({developerName:'Retric',publisherName:'Arthur Zhang',developerAddress:''}),[]);
+ assert.deepEqual(missingCreditNames({developerName:'Example Developer',publisherName:'Arthur Zhang',developerAddress:''}),[]);
 });

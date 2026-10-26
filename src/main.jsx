@@ -1372,9 +1372,8 @@ function App({ walletApi }) {
               ))}
             </fieldset>
             <p className="fine">
-              Saved on this browser. Motion applies to the store. Graphics
-              adjusts Teeworlds and OpenStrike rendering without changing
-              gameplay.
+              Saved on this browser. Motion applies to the store. Games also
+              provide their own rendering controls.
             </p>
           </Modal>
         )}

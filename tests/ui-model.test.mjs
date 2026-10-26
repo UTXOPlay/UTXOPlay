@@ -35,8 +35,8 @@ test('catalog distinguishes original developers, ports and the publisher, and su
  const {ccc}=await import('@ckb-ccc/shell');const owner=ccc.ClientPublicMainnet.open();
  try {const parsed=await ccc.Address.fromString(address,owner.value);assert.ok(parsed.script);}finally{await owner.dispose();}
  for(const game of games)assert.deepEqual(game.publisher,{name:game.id==='botstrike'?'UTXOPlay Labs':'Arthur Zhang',address});
- const openstrike=games.find(g=>g.id==='botstrike');
- assert.deepEqual(openstrike.developer,{name:'Arthur Zhang',address});assert.equal(openstrike.upstream,undefined);assert.equal(openstrike.sourceUrl,'https://github.com/UTXOPlay/BotStrike');
+ const botstrike=games.find(g=>g.id==='botstrike');
+ assert.deepEqual(botstrike.developer,{name:'Arthur Zhang',address});assert.equal(botstrike.upstream,undefined);assert.equal(botstrike.sourceUrl,'https://github.com/UTXOPlay/BotStrike');
  const tee=games.find(g=>g.id==='teeworlds');assert.match(tee.developer.name,/Magnus Auvinen/);assert.equal(tee.developer.address,null);
  for(const game of games.filter(g=>g.id!=='teeworlds'))assert.deepEqual(game.developer,{name:'Arthur Zhang',address});
  for(const game of [tee]){assert.deepEqual(game.portedBy,{name:'Arthur Zhang',address});assert.ok(game.developer.sourceUrl.startsWith('https://github.com/'));}

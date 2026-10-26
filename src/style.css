@@ -377,7 +377,7 @@ h3 {
     linear-gradient(0deg, #050e14d9, transparent 40%);
   z-index: -2;
 }
-.hero.openstrike .hero-shade {
+.hero.botstrike .hero-shade {
   background:
     linear-gradient(90deg, #06131cf5, #071927c9 35%, #0b1c2311 78%),
     linear-gradient(0deg, #060e16cc, transparent 45%);
@@ -1336,10 +1336,6 @@ h3 {
 .game-frame.sling {
   height: 1100px;
 }
-.game-frame.openstrike {
-  height: 760px;
-  background: #071522;
-}
 .game-frame.teeworlds {
   height: 760px;
 }
@@ -2151,7 +2147,7 @@ h3 {
     object-position: 67% 50%;
   }
   .hero-shade,
-  .hero.openstrike .hero-shade {
+  .hero.botstrike .hero-shade {
     background:
       linear-gradient(90deg, #090f0ded, #090f0d99 70%, #090f0d55),
       linear-gradient(0deg, #090f0de0, transparent 60%);
@@ -2415,9 +2411,6 @@ h3 {
   }
   .game-frame.teeworlds {
     height: 850px;
-  }
-  .game-frame.openstrike {
-    height: 760px;
   }
   .play-info {
     padding: 20px 0;
