@@ -45,49 +45,7 @@ export function apiError(error) {
     return "We couldn’t reach UTXOPlay. Check your connection and try again.";
   return error?.message || "Something went wrong. Please try again.";
 }
-export const gameMeta = {
-  'rune-foundry': {accent:'#ffcd8d',tag:'THE ALCHEMIST’S WORKSHOP',length:'12 escalating stages',input:'Keyboard + touch',note:'Match runes. Build chains. Reforge your fate.',repo:'UTXOPlay'},
-  'lumen-weave': {accent:'#a8e5ff',tag:'TWIN-LIGHT OBSERVATORY',length:'24 solvable networks',input:'Keyboard + touch',note:'Two rotations. One living circuit.',repo:'UTXOPlay'},
-  'orbit-courier': {accent:'#a9efe7',tag:'SPECIAL DELIVERY',length:'12 orbital routes',input:'Keyboard + touch',note:'Precious cargo. Perfect timing.',repo:'UTXOPlay'},
-  mosslight: {accent:'#c7ebaf',tag:'THE LANTERN GARDENS',length:'12 living gardens',input:'Keyboard + touch',note:'Leave a light. Lead them home.',repo:'UTXOPlay'},
-  "neon-miner": {accent:"#ffd075",tag:"THE UNDERCITY",length:"60 sectors to explore",input:"One-button + touch",note:"Time the swing. Take the gold. Upgrade your rig.",repo:"UTXOPlay"},
-  "prism-breaker": {"accent": "#b7a2ff", "tag": "REFRACTION LAB", "length": "24 crystal sectors", "input": "Keyboard + touch", "note": "Bend light. Rewrite the angle.", "repo": "UTXOPlay"},
-  "neon-coil": {"accent": "#84efba", "tag": "LIVING CIRCUIT", "length": "Quick arcade runs", "input": "Keyboard + touch", "note": "Grow a circuit. Close it. Cash it in.", "repo": "UTXOPlay"},
-  "starfall": {"accent": "#7edaff", "tag": "ORBITAL DEFENCE", "length": "Quick arcade runs", "input": "Keyboard + touch", "note": "Catch their fire. Send it home.", "repo": "UTXOPlay"},
-  "drift-run": {"accent": "#ffbc83", "tag": "AFTER HOURS", "length": "Quick arcade runs", "input": "Keyboard + touch", "note": "Leave an echo. Steal a second line.", "repo": "UTXOPlay"},
-  openstrike: {
-    accent: "#69b7ad",
-    tag: "SUNLIT HARBOR",
-    length: "90-second rounds",
-    input: "Keyboard + mouse / touch",
-    note: "Three training levels. A sunny harbor. One clean shot.",
-    repo: "myelin-openstrike",
-  },
-  teeworlds: {
-    accent: "#adce67",
-    tag: "GRASSLAND ARENA",
-    length: "60-second rounds",
-    input: "Keyboard + mouse",
-    note: "Practice solo or invite a friend to a private room.",
-    repo: "myelin-teeworlds",
-  },
-  sling: {
-    accent: "#ffc77b",
-    tag: "THE FLOATING GARDENS",
-    length: "Play at your pace",
-    input: "Mouse or touch",
-    note: "Four garden worlds, twelve islands, and a satchel full of possibilities.",
-    repo: "myelin-sling",
-  },
-  chess: {
-    accent: "#d9c18a",
-    tag: "THE BLUE HOUR CLUB",
-    length: "Play at your pace",
-    input: "Mouse or touch",
-    note: "Invite a friend. Share a table. Challenge Stockfish.",
-    repo: "myelin-chess",
-  },
-};
+
 
 // Publisher collections follow wallet identity. Unverified developer claims stay
 // inside the publishing account's catalog; names alone never merge identities.

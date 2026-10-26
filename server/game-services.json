@@ -1,0 +1,121 @@
+{
+  "chess": {
+    "url": "http://127.0.0.1:8881",
+    "urlEnv": "MYELIN_CHESS_URL",
+    "tokenEnv": "MYELIN_CHESS_TOKEN",
+    "socket": false,
+    "recordReads": true,
+    "actionLimit": 120,
+    "repository": "myelin-chess"
+  },
+  "sling": {
+    "url": "http://127.0.0.1:8882",
+    "urlEnv": "MYELIN_SLING_URL",
+    "tokenEnv": "MYELIN_SLING_TOKEN",
+    "socket": false,
+    "recordReads": true,
+    "actionLimit": 120,
+    "items": true,
+    "repository": "myelin-sling"
+  },
+  "teeworlds": {
+    "url": "http://127.0.0.1:8883",
+    "urlEnv": "MYELIN_TEEWORLDS_URL",
+    "tokenEnv": "MYELIN_TEEWORLDS_TOKEN",
+    "socket": true,
+    "recordReads": false,
+    "actionLimit": 1200,
+    "repository": "myelin-teeworlds"
+  },
+  "openstrike": {
+    "url": "http://127.0.0.1:8884",
+    "urlEnv": "MYELIN_OPENSTRIKE_URL",
+    "tokenEnv": "MYELIN_OPENSTRIKE_TOKEN",
+    "socket": true,
+    "recordReads": false,
+    "actionLimit": 1200,
+    "repository": "myelin-openstrike"
+  },
+  "neon-coil": {
+    "url": "http://127.0.0.1:8885",
+    "urlEnv": "MYELIN_ARCADE_URL",
+    "tokenEnv": "MYELIN_ARCADE_TOKEN",
+    "socket": false,
+    "recordReads": true,
+    "actionLimit": 120,
+    "repository": "myelin-arcade"
+  },
+  "starfall": {
+    "url": "http://127.0.0.1:8885",
+    "urlEnv": "MYELIN_ARCADE_URL",
+    "tokenEnv": "MYELIN_ARCADE_TOKEN",
+    "socket": false,
+    "recordReads": true,
+    "actionLimit": 120,
+    "repository": "myelin-arcade"
+  },
+  "drift-run": {
+    "url": "http://127.0.0.1:8885",
+    "urlEnv": "MYELIN_ARCADE_URL",
+    "tokenEnv": "MYELIN_ARCADE_TOKEN",
+    "socket": false,
+    "recordReads": true,
+    "actionLimit": 120,
+    "repository": "myelin-arcade"
+  },
+  "neon-miner": {
+    "url": "http://127.0.0.1:8886",
+    "urlEnv": "MYELIN_NEON_MINER_URL",
+    "tokenEnv": "MYELIN_NEON_MINER_TOKEN",
+    "socket": false,
+    "recordReads": true,
+    "actionLimit": 120,
+    "items": true,
+    "repository": "myelin-neon-miner"
+  },
+  "prism-breaker": {
+    "url": "http://127.0.0.1:8887",
+    "urlEnv": "MYELIN_PRISM_BREAKER_URL",
+    "tokenEnv": "MYELIN_PRISM_BREAKER_TOKEN",
+    "socket": false,
+    "recordReads": true,
+    "actionLimit": 120,
+    "repository": "myelin-prism-breaker"
+  },
+  "rune-foundry": {
+    "url": "http://127.0.0.1:8888",
+    "urlEnv": "MYELIN_ATELIER_URL",
+    "tokenEnv": "MYELIN_ATELIER_TOKEN",
+    "socket": false,
+    "recordReads": true,
+    "actionLimit": 120,
+    "repository": "myelin-atelier"
+  },
+  "lumen-weave": {
+    "url": "http://127.0.0.1:8888",
+    "urlEnv": "MYELIN_ATELIER_URL",
+    "tokenEnv": "MYELIN_ATELIER_TOKEN",
+    "socket": false,
+    "recordReads": true,
+    "actionLimit": 120,
+    "repository": "myelin-atelier"
+  },
+  "orbit-courier": {
+    "url": "http://127.0.0.1:8888",
+    "urlEnv": "MYELIN_ATELIER_URL",
+    "tokenEnv": "MYELIN_ATELIER_TOKEN",
+    "socket": false,
+    "recordReads": true,
+    "actionLimit": 120,
+    "repository": "myelin-atelier"
+  },
+  "mosslight": {
+    "url": "http://127.0.0.1:8888",
+    "urlEnv": "MYELIN_ATELIER_URL",
+    "tokenEnv": "MYELIN_ATELIER_TOKEN",
+    "socket": false,
+    "recordReads": true,
+    "actionLimit": 120,
+    "repository": "myelin-atelier"
+  }
+}

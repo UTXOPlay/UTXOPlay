@@ -15,7 +15,7 @@ UTXOPlay lists your game; you operate its web client and Myelin game runtime. Fr
 Requires Node 22.23+ and a separately built Myelin game runtime. Pin a reviewed UTXOPlay release/commit in your deployment.
 
 ```sh
-git clone https://github.com/Myelin-Labs/UTXOPlay.git
+git clone https://github.com/UTXOPlay/UTXOPlay.git
 cd UTXOPlay
 npm ci --omit=dev
 # Copy vendor.env.example to a private location and fill in your Studio values.

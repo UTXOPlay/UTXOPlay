@@ -12,8 +12,6 @@ test('startup reports reject stale launches, wrong games, regressions and incomp
 test('startup failures preserve earned progress and permit a fresh attempt',()=>{
  const state=accept(initialLoad(),{...report,progress:55,steps:[true,true,false,false]});const failed=accept(state,{...report,progress:55,steps:state.steps,error:'Session unavailable'});assert.equal(failed.error,'Session unavailable');assert.equal(failed.ready,false);assert.equal(accept(initialLoad(),report).progress,10);
 });
-test('every bundled entrypoint installs the same loader before its game module',()=>{
- const games=JSON.parse(readFileSync(new URL('../server/catalog.json',import.meta.url)));
- assert.equal(games.length,13);
- for(const game of games){const html=readFileSync(new URL(`../games/${game.id}/web/index.html`,import.meta.url),'utf8');const loader=html.indexOf('/game-loader.js?v=');assert.ok(loader>=0,game.id);assert.ok(loader<html.indexOf('</head>'),game.id);assert.ok(loader<html.indexOf('<script type="module"'),game.id);}
+test('the store loader is a reusable component without bundled game boot logic',()=>{
+ const source=readFileSync(new URL('../public/store-loader.js',import.meta.url),'utf8');assert.match(source,/customElements.define/);assert.doesNotMatch(source,/const game=location/);
 });

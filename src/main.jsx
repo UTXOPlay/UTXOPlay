@@ -55,7 +55,6 @@ import {
 import {
   genres,
   selectGames,
-  gameMeta,
   walletButtonState,
   apiError,
 } from "./ui-model.mjs";
@@ -701,7 +700,7 @@ function App({ walletApi }) {
                   <section
                     className={"hero " + hero.id}
                     aria-label="Featured game"
-                    style={{ "--accent": gameMeta[hero.id]?.accent }}
+                    style={{ "--accent": hero.presentation?.accent }}
                   >
                     <AnimatePresence initial={false}>
                       <motion.img
@@ -803,7 +802,7 @@ function App({ walletApi }) {
                         <img src={libraryGames[0].cover} alt="" />
                         <span>
                           <strong>{libraryGames[0].title}</strong>
-                          <small>{gameMeta[libraryGames[0].id]?.length}</small>
+                          <small>{libraryGames[0].presentation?.length}</small>
                         </span>
                         <Play size={18} fill="currentColor" />
                       </button>
@@ -1099,9 +1098,7 @@ function App({ walletApi }) {
                       <ShieldCheck size={21} />
                       <h3>A round worth keeping.</h3>
                       <p>
-                        {["teeworlds", "openstrike"].includes(game.id)
-                          ? "Completed rounds are replayed and saved to your account. Live rounds continue if you leave the page. Download your verified export after a match."
-                          : "Your moves and launches save as you play. Replay and export your session inside the game."}
+                        {game.replayDescription}
                       </p>
                       <p>
                         {signedIn
@@ -1138,7 +1135,7 @@ function App({ walletApi }) {
             <footer className="footer">
               <nav aria-label="Footer navigation">
                 <a
-                  href="https://github.com/Myelin-Labs/UTXOPlay"
+                  href="https://github.com/UTXOPlay/UTXOPlay"
                   target="_blank"
                   rel="noreferrer"
                 >

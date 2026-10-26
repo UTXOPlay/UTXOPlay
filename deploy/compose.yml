@@ -1,6 +1,6 @@
 services:
   store:
-    image: utxoplay:0.31.0
+    image: utxoplay:0.32.0
     container_name: utxoplay-store
     restart: unless-stopped
     init: true
@@ -8,14 +8,14 @@ services:
       PUBLIC_ORIGIN: https://store.utxoplay.io
       VIRTUAL_HOST: store.utxoplay.io,utxoplay.io,www.utxoplay.io
       VIRTUAL_PORT: '8790'
-      MINER_URL: http://utxoplay-miner:8786
-      PRISM_URL: http://utxoplay-prism:8787
-      ATELIER_URL: http://utxoplay-atelier:8788
-      ARCADE_URL: http://utxoplay-arcade:8785
-      CHESS_URL: http://utxoplay-chess:8781
-      SLING_URL: http://utxoplay-sling:8782
-      OPENSTRIKE_URL: http://utxoplay-openstrike:8784
-      TEEWORLDS_URL: http://utxoplay-teeworlds:8783
+      MYELIN_CHESS_URL: http://myelin-chess:8080
+      MYELIN_SLING_URL: http://myelin-sling:8080
+      MYELIN_TEEWORLDS_URL: http://myelin-teeworlds:8080
+      MYELIN_OPENSTRIKE_URL: http://myelin-openstrike:8080
+      MYELIN_ARCADE_URL: http://myelin-arcade:8080
+      MYELIN_NEON_MINER_URL: http://myelin-neon-miner:8080
+      MYELIN_PRISM_BREAKER_URL: http://myelin-prism-breaker:8080
+      MYELIN_ATELIER_URL: http://myelin-atelier:8080
     env_file: /data/utxoplay/shared/runtime.env
     volumes:
       - /data/utxoplay/shared/platform:/app/data
@@ -35,189 +35,7 @@ services:
       interval: 30s
       timeout: 5s
       retries: 3
-  chess:
-    image: utxoplay:0.1.0
-    container_name: utxoplay-chess
-    restart: unless-stopped
-    init: true
-    command: [/app/bin/myelin-chess]
-    environment: {PORT: '8781', BIND: 0.0.0.0}
-    env_file: /data/utxoplay/shared/runtime.env
-    volumes:
-      - /data/utxoplay/shared/chess:/app/data
-    networks: [games]
-    mem_limit: 384m
-    cpus: '0.75'
-    pids_limit: 128
-    security_opt: [no-new-privileges:true]
-    cap_drop: [ALL]
-    read_only: true
-    tmpfs: [/tmp:size=64m]
-    logging: {driver: json-file, options: {max-size: 10m, max-file: '3'}}
-  sling:
-    image: utxoplay:0.11.0
-    container_name: utxoplay-sling
-    restart: unless-stopped
-    init: true
-    command: [/app/bin/myelin-sling]
-    environment: {PORT: '8782', BIND: 0.0.0.0}
-    env_file: /data/utxoplay/shared/runtime.env
-    volumes:
-      - /data/utxoplay/shared/sling-coins:/app/data
-    networks: [games]
-    mem_limit: 384m
-    cpus: '0.75'
-    pids_limit: 128
-    security_opt: [no-new-privileges:true]
-    cap_drop: [ALL]
-    read_only: true
-    tmpfs: [/tmp:size=64m]
-    logging: {driver: json-file, options: {max-size: 10m, max-file: '3'}}
-  teeworlds:
-    image: myelin-teeworlds:0.1.1
-    container_name: utxoplay-teeworlds
-    restart: unless-stopped
-    init: true
-    env_file: /data/utxoplay/shared/runtime.env
-    volumes:
-      - /data/utxoplay/shared/teeworlds:/app/data
-    networks: [games]
-    mem_limit: 512m
-    cpus: '1.0'
-    pids_limit: 128
-    security_opt: [no-new-privileges:true]
-    cap_drop: [ALL]
-    read_only: true
-    tmpfs: [/tmp:size=64m]
-    logging: {driver: json-file, options: {max-size: 10m, max-file: '3'}}
-    healthcheck:
-      test: [CMD, node, -e, "fetch('http://127.0.0.1:8783/api/state',{headers:{'X-Runtime-Token':process.env.RUNTIME_TOKEN,'X-UTXOPlay-Account':'0'.repeat(64)}}).then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-
-  openstrike:
-    image: myelin-openstrike:0.2.0
-    container_name: utxoplay-openstrike
-    restart: unless-stopped
-    init: true
-    env_file: /data/utxoplay/shared/runtime.env
-    volumes:
-      - /data/utxoplay/shared/openstrike:/app/data
-    networks: [games]
-    mem_limit: 768m
-    cpus: '1.0'
-    pids_limit: 128
-    security_opt: [no-new-privileges:true]
-    cap_drop: [ALL]
-    read_only: true
-    tmpfs: [/tmp:size=64m]
-    logging: {driver: json-file, options: {max-size: 10m, max-file: '3'}}
-    healthcheck:
-      test: [CMD, node, -e, "fetch('http://127.0.0.1:8784/api/state',{headers:{'X-Runtime-Token':process.env.RUNTIME_TOKEN,'X-UTXOPlay-Account':'0'.repeat(64)}}).then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-
-  arcade:
-    image: utxoplay:0.23.0
-    container_name: utxoplay-arcade
-    restart: unless-stopped
-    init: true
-    command: [/app/bin/myelin-arcade]
-    environment: {PORT: '8785', BIND: 0.0.0.0}
-    env_file: /data/utxoplay/shared/runtime.env
-    volumes:
-      - /data/utxoplay/shared/arcade-signatures:/app/data
-    networks: [games]
-    mem_limit: 768m
-    cpus: '1.0'
-    pids_limit: 128
-    security_opt: [no-new-privileges:true]
-    cap_drop: [ALL]
-    read_only: true
-    tmpfs: [/tmp:size=64m]
-    logging: {driver: json-file, options: {max-size: 10m, max-file: '3'}}
-    healthcheck:
-      test: [CMD, node, -e, "fetch('http://127.0.0.1:8785/prism-breaker/api/state',{headers:{'X-Runtime-Token':process.env.RUNTIME_TOKEN,'X-UTXOPlay-Account':'0'.repeat(64)}}).then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
-  miner:
-    image: utxoplay:0.16.0
-    container_name: utxoplay-miner
-    restart: unless-stopped
-    init: true
-    command: [/app/bin/myelin-neon-miner]
-    environment: {PORT: '8786', BIND: 0.0.0.0}
-    env_file: /data/utxoplay/shared/runtime.env
-    volumes:
-      - /data/utxoplay/shared/neon-miner-deep-expedition:/app/data
-    networks: [games]
-    mem_limit: 384m
-    cpus: '0.75'
-    pids_limit: 128
-    security_opt: [no-new-privileges:true]
-    cap_drop: [ALL]
-    read_only: true
-    tmpfs: [/tmp:size=64m]
-    logging: {driver: json-file, options: {max-size: 10m, max-file: '3'}}
-    healthcheck:
-      test: [CMD, node, -e, "fetch('http://127.0.0.1:8786/neon-miner/api/state',{headers:{'X-Runtime-Token':process.env.RUNTIME_TOKEN,'X-UTXOPlay-Account':'0'.repeat(64)}}).then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-  prism:
-    image: utxoplay:0.23.0
-    container_name: utxoplay-prism
-    restart: unless-stopped
-    init: true
-    command: [/app/bin/myelin-prism-breaker]
-    environment: {PORT: '8787', BIND: 0.0.0.0}
-    env_file: /data/utxoplay/shared/runtime.env
-    volumes:
-      - /data/utxoplay/shared/prism-refraction:/app/data
-    networks: [games]
-    mem_limit: 384m
-    cpus: '0.75'
-    pids_limit: 128
-    security_opt: [no-new-privileges:true]
-    cap_drop: [ALL]
-    read_only: true
-    tmpfs: [/tmp:size=64m]
-    logging: {driver: json-file, options: {max-size: 10m, max-file: '3'}}
-    healthcheck:
-      test: [CMD, node, -e, "fetch('http://127.0.0.1:8787/prism-breaker/api/state',{headers:{'X-Runtime-Token':process.env.RUNTIME_TOKEN,'X-UTXOPlay-Account':'0'.repeat(64)}}).then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
-  atelier:
-    image: utxoplay:0.25.0
-    container_name: utxoplay-atelier
-    restart: unless-stopped
-    init: true
-    command: [/app/bin/myelin-atelier]
-    environment: {PORT: '8788', BIND: 0.0.0.0}
-    env_file: /data/utxoplay/shared/runtime.env
-    volumes:
-      - /data/utxoplay/shared/atelier:/app/data
-    networks: [games]
-    mem_limit: 768m
-    cpus: '1.0'
-    pids_limit: 128
-    security_opt: [no-new-privileges:true]
-    cap_drop: [ALL]
-    read_only: true
-    tmpfs: [/tmp:size=64m]
-    logging: {driver: json-file, options: {max-size: 10m, max-file: '3'}}
-    healthcheck:
-      test: [CMD, node, -e, "fetch('http://127.0.0.1:8788/rune-foundry/api/state',{headers:{'X-Runtime-Token':process.env.RUNTIME_TOKEN,'X-UTXOPlay-Account':'0'.repeat(64)}}).then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
 
 networks:
   edge: {external: true, name: stack-network}
-  games: {internal: true}
+  games: {external: true, name: utxoplay-games}

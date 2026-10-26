@@ -27,14 +27,14 @@ test('wrong origin, wrong address signature, and cross-account projects are reje
 test('Teeworlds catalog and proxy use the dedicated runtime with authenticated identity',async()=>{
  const catalog=await req('/api/games');assert.equal(catalog.data.games.length,13);assert.equal(catalog.data.games.find(g=>g.id==='teeworlds').mode,'Online duel + practice');
  const guest=await req('/api/guest',{});const r=await req('/games/teeworlds/api/action',{type:'create',mode:'duel'},guest.cookie,{'X-UTXOPlay-Account':'f'.repeat(64)});assert.equal(r.status,200);
- const call=calls.at(-1);assert.equal(call.url,'http://127.0.0.1:8783/api/action');assert.equal(call.options.headers['X-UTXOPlay-Account'],guest.data.user.id);
+ const call=calls.at(-1);assert.equal(call.url,'http://127.0.0.1:8883/games/teeworlds/api/action');assert.equal(call.options.headers['X-UTXOPlay-Account'],guest.data.user.id);
  assert.equal((await req('/api/library',undefined,guest.cookie)).data.games[0].game,'teeworlds');
  assert.equal((await req('/games/teeworlds/api/action',{type:'create',mode:'duel'},guest.cookie,{Origin:'https://evil.invalid'})).status,403);
 });
 
 test('OpenStrike uses its own runtime and authenticated account',async()=>{
  const guest=await req('/api/guest',{});const r=await req('/games/openstrike/api/action',{type:'create',mode:'duel'},guest.cookie,{'X-UTXOPlay-Account':'f'.repeat(64)});assert.equal(r.status,200);
- const call=calls.at(-1);assert.equal(call.url,'http://127.0.0.1:8784/api/action');assert.equal(call.options.headers['X-UTXOPlay-Account'],guest.data.user.id);
+ const call=calls.at(-1);assert.equal(call.url,'http://127.0.0.1:8884/games/openstrike/api/action');assert.equal(call.options.headers['X-UTXOPlay-Account'],guest.data.user.id);
  assert.equal((await req('/api/library',undefined,guest.cookie)).data.games[0].game,'openstrike');
  assert.equal((await req('/games/openstrike/api/action',{type:'create',mode:'duel'},guest.cookie,{Origin:'https://evil.invalid'})).status,403);
 });
@@ -64,10 +64,10 @@ test('persistent quotas retain counts and reset only after expiry',async()=>{
   const guest=await req('/api/guest',{});
   for(const id of ['prism-breaker','neon-coil','starfall','drift-run']){
    const r=await req(`/games/${id}/api/state`,undefined,guest.cookie,{'X-UTXOPlay-Account':'f'.repeat(64)});assert.equal(r.status,200);
-   const call=calls.at(-1);assert.equal(call.url,`http://127.0.0.1:${id==='prism-breaker'?8787:8785}/${id}/api/state`);assert.equal(call.options.headers['X-UTXOPlay-Account'],guest.data.user.id);
+   const call=calls.at(-1);assert.equal(call.url,`http://127.0.0.1:${id==='prism-breaker'?8887:8885}/games/${id}/api/state`);assert.equal(call.options.headers['X-UTXOPlay-Account'],guest.data.user.id);
   }
  });
 
-test('Neon Prospector routes to its isolated Myelin runtime',async()=>{const guest=await req('/api/guest',{});const r=await req('/games/neon-miner/api/state',undefined,guest.cookie);assert.equal(r.status,200);assert.equal(calls.at(-1).url,'http://127.0.0.1:8786/neon-miner/api/state');assert.equal(calls.at(-1).options.headers['X-UTXOPlay-Account'],guest.data.user.id);});
+test('Neon Prospector routes to its isolated Myelin runtime',async()=>{const guest=await req('/api/guest',{});const r=await req('/games/neon-miner/api/state',undefined,guest.cookie);assert.equal(r.status,200);assert.equal(calls.at(-1).url,'http://127.0.0.1:8886/games/neon-miner/api/state');assert.equal(calls.at(-1).options.headers['X-UTXOPlay-Account'],guest.data.user.id);});
 
-test('atelier games use their independent authenticated runtime',async()=>{const guest=await req('/api/guest',{});for(const id of ['rune-foundry','lumen-weave','orbit-courier','mosslight']){const r=await req(`/games/${id}/api/state`,undefined,guest.cookie);assert.equal(r.status,200);assert.equal(calls.at(-1).url,`http://127.0.0.1:8788/${id}/api/state`);assert.equal(calls.at(-1).options.headers['X-UTXOPlay-Account'],guest.data.user.id);}});
+test('atelier games use their independent authenticated runtime',async()=>{const guest=await req('/api/guest',{});for(const id of ['rune-foundry','lumen-weave','orbit-courier','mosslight']){const r=await req(`/games/${id}/api/state`,undefined,guest.cookie);assert.equal(r.status,200);assert.equal(calls.at(-1).url,`http://127.0.0.1:8888/games/${id}/api/state`);assert.equal(calls.at(-1).options.headers['X-UTXOPlay-Account'],guest.data.user.id);}});

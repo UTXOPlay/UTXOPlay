@@ -20,8 +20,4 @@ function compress(root) {
     if (gz.length < input.length) writeFileSync(file + ".gz", gz);
   }
 }
-for (const root of [
-  "dist",
-  ...["chess", "sling", "teeworlds", "openstrike", "arcade", "prism-breaker", "neon-coil", "starfall", "drift-run", "neon-miner", "atelier", "rune-foundry", "lumen-weave", "orbit-courier", "mosslight"].map((g) => `games/${g}/web`),
-])
-  compress(root);
+compress("dist");

@@ -1,9 +1,9 @@
 import express from 'express';
-import {installChessRooms} from './chess-rooms.mjs';
+
 import {installCommunity} from './community.mjs';
 import {optimizedStatic} from './static.mjs';
 import {installMarketplace} from './marketplace.mjs';
-import {teeworldsSockets} from './teeworlds-socket.mjs';
+import {installGameGateway,loadIntegrations} from './game-gateway.mjs';
 import { DatabaseSync } from 'node:sqlite';
 import { randomBytes } from 'node:crypto';
 import { mkdirSync, readFileSync, existsSync } from 'node:fs';
@@ -14,7 +14,8 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const version=JSON.parse(readFileSync(path.join(root,'package.json'),'utf8')).version;
 export const games=JSON.parse(readFileSync(path.join(root,'server/catalog.json'),'utf8'));
 
-export function createApp({dataDir=process.env.DATA_DIR||path.join(root,'data'), origin=process.env.PUBLIC_ORIGIN||'http://127.0.0.1:8790', verify=verifyWallet, runtimeFetch=fetch, marketplaceOptions={}}={}) {
+export function createApp({dataDir=process.env.DATA_DIR||path.join(root,'data'), origin=process.env.PUBLIC_ORIGIN||'http://127.0.0.1:8790', verify=verifyWallet, runtimeFetch=fetch, assetFetch=fetch, gameServices=loadIntegrations(), catalog=games, marketplaceOptions={}}={}) {
+ const games=catalog;
  mkdirSync(dataDir,{recursive:true,mode:0o700});
  const db=new DatabaseSync(path.join(dataDir,'platform.sqlite'));
  db.exec(`PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; PRAGMA busy_timeout=5000;
@@ -94,36 +95,17 @@ export function createApp({dataDir=process.env.DATA_DIR||path.join(root,'data'),
  const community=installCommunity({app,db,account,limited,games});
  const marketplace=installMarketplace({app,db,account,needUser,limited,origin,builtinGames:games,...marketplaceOptions});
  app.get('/api/library',needUser,(req,res)=>res.json({games:marketplace.library(req.account.id)}));
- const chessRooms=installChessRooms({app,db,account,needUser,limited,runtimeFetch,recordPlay,community});
- app.use('/games/:game/api',needUser,async(req,res)=>{
-  if(!games.some(g=>g.id===req.params.game))return res.status(404).json({error:'Unknown game'});
-  const endpoint=req.path;
-  if(!((req.method==='GET'&&['/state','/export'].includes(endpoint))||(req.method==='POST'&&['/new','/action','/replay'].includes(endpoint))))return res.status(404).json({error:'Unknown endpoint'});
-  if(['teeworlds','openstrike'].includes(req.params.game)&&req.body?.type==='create'&&limited(req.account.id+':'+req.params.game+':create',20,3600000))return res.status(429).json({error:'Match creation limit reached. Please return later.'});
-  if(req.method==='POST'&&limited(req.account.id+':'+req.params.game+':'+endpoint,['teeworlds','openstrike'].includes(req.params.game)?1200:endpoint==='/new'?10:120,60000))return res.status(429).json({error:'Please wait before trying again.'});
-  try {
-   const base=req.params.game==='prism-breaker'?(process.env.PRISM_URL||'http://127.0.0.1:8787')+'/prism-breaker':req.params.game==='neon-miner'?(process.env.MINER_URL||'http://127.0.0.1:8786')+'/neon-miner':games.find(g=>g.id===req.params.game)?.runtime==='atelier'?(process.env.ATELIER_URL||'http://127.0.0.1:8788')+'/'+req.params.game:games.find(g=>g.id===req.params.game)?.runtime==='arcade'?(process.env.ARCADE_URL||'http://127.0.0.1:8785')+'/'+req.params.game:req.params.game==='openstrike'?(process.env.OPENSTRIKE_URL||'http://127.0.0.1:8784'):req.params.game==='teeworlds'?(process.env.TEEWORLDS_URL||'http://127.0.0.1:8783'):req.params.game==='chess'?(process.env.CHESS_URL||'http://127.0.0.1:8781'):(process.env.SLING_URL||'http://127.0.0.1:8782');
-   const result=await runtimeFetch(base+'/api'+endpoint,{method:req.method,headers:{'Content-Type':'application/json','X-Runtime-Token':process.env.RUNTIME_TOKEN||'','X-UTXOPlay-Account':req.account.id},body:req.method==='POST'?JSON.stringify(req.body||{}):undefined,signal:AbortSignal.timeout(20000)});
-   const content=await result.text();
-   if(result.ok && req.method==='POST' && endpoint==='/action')community.recordPlay(req.account.id,req.params.game);
-   if(result.ok && (!['teeworlds','openstrike'].includes(req.params.game)||req.method==='POST'&&['create','join'].includes(req.body?.type)))recordPlay.run(req.account.id,req.params.game,Date.now(),req.method==='POST'?1:0);
-   if(endpoint==='/export')res.set('Content-Disposition',`attachment; filename="utxoplay-${req.params.game}-session.json"`);
-   res.status(result.status).type('json').send(content);
-  }catch(e){console.error('runtime request failed',req.params.game,e.name);res.status(503).json({error:'The game is waking up. Please retry in a moment; your saved progress is safe.'});}
- });
- app.use('/atelier',optimizedStatic(path.join(root,'games/atelier/web')));
- app.use('/arcade',optimizedStatic(path.join(root,'games/arcade/web')));
- for(const game of games)app.use('/games/'+game.id,(_req,res,next)=>{res.set('Content-Security-Policy',`default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; connect-src 'self' ${new URL(origin).protocol==='https:'?'wss:':'ws:'}//${new URL(origin).host}; object-src 'none'; frame-ancestors 'self'; base-uri 'none'; form-action 'none'`);next();},optimizedStatic(path.join(root,'games',game.id,'web')));
+ const gateway=installGameGateway({app,services:gameServices,account,needUser,limited,origin,runtimeFetch,assetFetch,recordPlay,recordActivity:community.recordPlay,knownAccount:id=>!!db.prepare('SELECT 1 FROM accounts WHERE id=?').get(id)});
  app.use('/api',(_req,res)=>res.status(404).json({error:'Unknown API endpoint'}));
  app.use(optimizedStatic(path.join(root,'dist'),{index:false}));
  app.get('/{*path}',(_req,res)=>{res.set('Cache-Control','no-cache');res.sendFile(path.join(root,'dist','index.html'));});
  app.use((err,_req,res,_next)=>res.status(err.status||500).json({error:err.status===413?'Request too large':'Unable to complete request'}));
  const cleanup=setInterval(()=>{const t=Date.now();db.prepare('DELETE FROM sessions WHERE expires<?').run(t);db.prepare('DELETE FROM challenges WHERE expires<?').run(t);db.prepare('DELETE FROM limits WHERE expires<?').run(t);},60000);cleanup.unref();
- const sockets=teeworldsSockets({account,origin,limited});
- return {app,db,attachSockets:sockets.attach,close:()=>{chessRooms.close();marketplace.close();sockets.close();clearInterval(cleanup);db.close();}};
+ return {app,db,attachSockets:gateway.attach,close:()=>{gateway.close();marketplace.close();clearInterval(cleanup);db.close();}};
 }
 if(process.argv[1]===fileURLToPath(import.meta.url)){
- if(!process.env.RUNTIME_TOKEN||process.env.RUNTIME_TOKEN.length<32)throw new Error('RUNTIME_TOKEN must be set');
+ const configured=loadIntegrations();
+ if([...configured.values()].some(s=>s.token.length<32))throw new Error('Set a server-only token of at least 32 characters for every configured game service');
  const service=createApp();const server=service.app.listen(Number(process.env.PORT||8790),process.env.BIND||'127.0.0.1',()=>console.log('UTXOPlay listening on '+(process.env.PORT||8790)));
  service.attachSockets(server);
  for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>{service.close();server.close(()=>process.exit(0));});

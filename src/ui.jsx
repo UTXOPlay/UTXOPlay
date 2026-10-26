@@ -13,7 +13,7 @@ import {
   RefreshCw,
   AlertCircle,
 } from "lucide-react";
-import { gameMeta, creatorHref } from "./ui-model.mjs";
+import { creatorHref } from "./ui-model.mjs";
 export function BrandIcon({ className = "" }) {
   return (
     <img
@@ -160,7 +160,7 @@ export function GameCredits({ game, compact = false, linked = true }) {
   </dl>;
 }
 export function GameCard({ g, onPlay, onDetails, launching, updated }) {
-  const meta = gameMeta[g.id] || { accent: "#8bf4b9", length: "Publisher hosted" };
+  const meta = g.presentation || { accent: "#8bf4b9", length: "Publisher hosted" };
   return (
     <motion.article
       layout
@@ -233,7 +233,7 @@ export function GameCard({ g, onPlay, onDetails, launching, updated }) {
   );
 }
 export function GameDetails({ game, onClose, onPlay, launching, onCommunity }) {
-  const meta = gameMeta[game.id] || {
+  const meta = game.presentation || {
     tag: "INDEPENDENT / MYELIN",
     length: "Publisher hosted",
     input: "See controls",

@@ -5,7 +5,6 @@
     "subtitle": "Time the swing. Take the gold.",
     "genre": "Arcade",
     "mode": "Single-player",
-    "runtime": "miner",
     "description": "Descend through 60 sectors with five contract types, drifting ore, volatile mines and armored vaults. Upgrade the winch, freeze the field and chain hauls before the deep-sector timer expires.",
     "cover": "/assets/neon-miner-cover.webp",
     "version": "0.2.0",
@@ -13,7 +12,7 @@
     "players": "1 player",
     "headline": "The undercity.|Yours to mine.",
     "heroDescription": "Descend through 60 sectors with five contract types, drifting ore, volatile mines and armored vaults. Upgrade the winch, freeze the field and chain hauls before the deep-sector timer expires.",
-    "caption": "NEON PROSPECTOR \u00b7 DEEP CITY MINING",
+    "caption": "NEON PROSPECTOR · DEEP CITY MINING",
     "myelin": {
       "based": true,
       "evidence": "host-replay",
@@ -26,7 +25,17 @@
     "publisher": {
       "name": "Arthur Zhang",
       "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
-    }
+    },
+    "presentation": {
+      "accent": "#ffd075",
+      "tag": "THE UNDERCITY",
+      "length": "60 sectors to explore",
+      "input": "One-button + touch",
+      "note": "Time the swing. Take the gold. Upgrade your rig.",
+      "repo": "myelin-neon-miner"
+    },
+    "sourceUrl": "https://github.com/UTXOPlay/myelin-neon-miner",
+    "replayDescription": "Your progress saves as you play. Replay and export your session inside the game."
   },
   {
     "id": "prism-breaker",
@@ -41,14 +50,13 @@
     "players": "1 player",
     "headline": "Bend light.|Rewrite the angle.",
     "heroDescription": "Break crystals to charge directional Refraction, then bend every ball up-left or up-right at the critical moment. A 24-sector campaign with capsules, chain explosions and permanent perk drafts.",
-    "caption": "PRISM BREAKER \u00b7 CRYSTAL CAMPAIGN",
+    "caption": "PRISM BREAKER · CRYSTAL CAMPAIGN",
     "myelin": {
       "based": true,
       "version": "0.31.0",
       "evidence": "host-replay",
       "logo": "/assets/myelin-logo.png?v=0.7.1"
     },
-    "runtime": "arcade",
     "developer": {
       "name": "Arthur Zhang",
       "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
@@ -56,7 +64,17 @@
     "publisher": {
       "name": "Arthur Zhang",
       "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
-    }
+    },
+    "presentation": {
+      "accent": "#b7a2ff",
+      "tag": "REFRACTION LAB",
+      "length": "24 crystal sectors",
+      "input": "Keyboard + touch",
+      "note": "Bend light. Rewrite the angle.",
+      "repo": "myelin-prism-breaker"
+    },
+    "sourceUrl": "https://github.com/UTXOPlay/myelin-prism-breaker",
+    "replayDescription": "Your progress saves as you play. Replay and export your session inside the game."
   },
   {
     "id": "neon-coil",
@@ -71,14 +89,13 @@
     "players": "1 player",
     "headline": "Grow a circuit.|Close it. Cash it in.",
     "heroDescription": "Grow to at least 9 segments, loop back into your own circuit around empty tiles, then discharge the enclosed area for points and a shorter tail. Bigger circuits reward deliberate routing; small knots still end the run.",
-    "caption": "NEON COIL \u00b7 LIVING CIRCUIT",
+    "caption": "NEON COIL · LIVING CIRCUIT",
     "myelin": {
       "based": true,
       "version": "0.31.0",
       "evidence": "host-replay",
       "logo": "/assets/myelin-logo.png?v=0.7.1"
     },
-    "runtime": "arcade",
     "developer": {
       "name": "Arthur Zhang",
       "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
@@ -86,7 +103,17 @@
     "publisher": {
       "name": "Arthur Zhang",
       "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
-    }
+    },
+    "presentation": {
+      "accent": "#84efba",
+      "tag": "LIVING CIRCUIT",
+      "length": "Quick arcade runs",
+      "input": "Keyboard + touch",
+      "note": "Grow a circuit. Close it. Cash it in.",
+      "repo": "myelin-arcade"
+    },
+    "sourceUrl": "https://github.com/UTXOPlay/myelin-arcade",
+    "replayDescription": "Your progress saves as you play. Replay and export your session inside the game."
   },
   {
     "id": "starfall",
@@ -101,14 +128,13 @@
     "players": "1 player",
     "headline": "Catch their fire.|Send it home.",
     "heroDescription": "Trade your guns for a temporary capture shield. Absorb up to six enemy shots, then release a reflected fan for double points per hit. Overheating leaves a two-second opening: read the enemy volley and choose your moment.",
-    "caption": "STARFALL \u00b7 ORBITAL DEFENCE",
+    "caption": "STARFALL · ORBITAL DEFENCE",
     "myelin": {
       "based": true,
       "version": "0.31.0",
       "evidence": "host-replay",
       "logo": "/assets/myelin-logo.png?v=0.7.1"
     },
-    "runtime": "arcade",
     "developer": {
       "name": "Arthur Zhang",
       "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
@@ -116,7 +142,17 @@
     "publisher": {
       "name": "Arthur Zhang",
       "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
-    }
+    },
+    "presentation": {
+      "accent": "#7edaff",
+      "tag": "ORBITAL DEFENCE",
+      "length": "Quick arcade runs",
+      "input": "Keyboard + touch",
+      "note": "Catch their fire. Send it home.",
+      "repo": "myelin-arcade"
+    },
+    "sourceUrl": "https://github.com/UTXOPlay/myelin-arcade",
+    "replayDescription": "Your progress saves as you play. Replay and export your session inside the game."
   },
   {
     "id": "drift-run",
@@ -131,14 +167,13 @@
     "players": "1 player",
     "headline": "Leave an echo.|Steal a second line.",
     "heroDescription": "A lane change leaves an echo that catches rings behind you. Echo pickups and close passes charge a brief Overdrive that smashes barriers. Plan two lanes at once as the city accelerates.",
-    "caption": "DRIFT RUN \u00b7 AFTER HOURS",
+    "caption": "DRIFT RUN · AFTER HOURS",
     "myelin": {
       "based": true,
       "version": "0.31.0",
       "evidence": "host-replay",
       "logo": "/assets/myelin-logo.png?v=0.7.1"
     },
-    "runtime": "arcade",
     "developer": {
       "name": "Arthur Zhang",
       "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
@@ -146,7 +181,17 @@
     "publisher": {
       "name": "Arthur Zhang",
       "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
-    }
+    },
+    "presentation": {
+      "accent": "#ffbc83",
+      "tag": "AFTER HOURS",
+      "length": "Quick arcade runs",
+      "input": "Keyboard + touch",
+      "note": "Leave an echo. Steal a second line.",
+      "repo": "myelin-arcade"
+    },
+    "sourceUrl": "https://github.com/UTXOPlay/myelin-arcade",
+    "replayDescription": "Your progress saves as you play. Replay and export your session inside the game."
   },
   {
     "id": "openstrike",
@@ -155,13 +200,13 @@
     "genre": "Action",
     "mode": "Online duel + practice",
     "description": "A sunlit harbor, charming robots and a clean first-person duel. Train at three difficulty levels or invite a friend. Original OpenStrike rules with native Myelin replay verification.",
-    "cover": "/games/openstrike/art/harbor-keyart.webp",
+    "cover": "/assets/openstrike-listing.webp",
     "version": "0.1.0",
     "controls": "Choose Rookie, Standard or Veteran training, or invite a friend for a 90-second duel. WASD moves, mouse aims, click fires, Shift walks and R reloads. Escape opens the in-game menu. Touch controls, field of view and sensitivity are adjustable in Your setup.",
-    "players": "1\u20132 players online",
+    "players": "1–2 players online",
     "headline": "One arena.|One clean shot.",
     "heroDescription": "Find your angle in Neon Divide. A quick first-person duel, with every round ready to replay.",
-    "caption": "OPENSTRIKE \u00b7 NEON DIVIDE",
+    "caption": "OPENSTRIKE · NEON DIVIDE",
     "myelin": {
       "based": true,
       "evidence": "host-replay",
@@ -179,7 +224,17 @@
     "portedBy": {
       "name": "Arthur Zhang",
       "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
-    }
+    },
+    "presentation": {
+      "accent": "#69b7ad",
+      "tag": "SUNLIT HARBOR",
+      "length": "90-second rounds",
+      "input": "Keyboard + mouse / touch",
+      "note": "Three training levels. A sunny harbor. One clean shot.",
+      "repo": "myelin-openstrike"
+    },
+    "sourceUrl": "https://github.com/UTXOPlay/myelin-openstrike",
+    "replayDescription": "Completed rounds are replayed and saved to your account. Live rounds continue if you leave the page. Download your verified export after a match."
   },
   {
     "id": "teeworlds",
@@ -191,10 +246,10 @@
     "cover": "/assets/teeworlds-cover.svg",
     "version": "0.1.0",
     "controls": "A/D to move, Space to double jump, mouse to aim, left click to fire, right click to hook. Create a private duel or practice against a bot.",
-    "players": "1\u20132 players online",
+    "players": "1–2 players online",
     "headline": "Hook in.|Let it fly.",
     "heroDescription": "Little feet. Long reach. Grab a friend for a minute of movement and mayhem.",
-    "caption": "TEEWORLDS \u00b7 GRASSLAND ARENA",
+    "caption": "TEEWORLDS · GRASSLAND ARENA",
     "myelin": {
       "based": true,
       "evidence": "host-replay",
@@ -212,7 +267,17 @@
     "portedBy": {
       "name": "Arthur Zhang",
       "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
-    }
+    },
+    "presentation": {
+      "accent": "#adce67",
+      "tag": "GRASSLAND ARENA",
+      "length": "60-second rounds",
+      "input": "Keyboard + mouse",
+      "note": "Practice solo or invite a friend to a private room.",
+      "repo": "myelin-teeworlds"
+    },
+    "sourceUrl": "https://github.com/UTXOPlay/myelin-teeworlds",
+    "replayDescription": "Completed rounds are replayed and saved to your account. Live rounds continue if you leave the page. Download your verified export after a match."
   },
   {
     "id": "sling",
@@ -227,7 +292,7 @@
     "players": "1 player",
     "headline": "A little pull.|A big adventure.",
     "heroDescription": "Four beautiful garden worlds. A satchel of possibilities. Find your perfect arc.",
-    "caption": "SKYWARD \u00b7 THE FLOATING GARDENS",
+    "caption": "SKYWARD · THE FLOATING GARDENS",
     "myelin": {
       "based": true,
       "evidence": "host-replay",
@@ -240,7 +305,17 @@
     "publisher": {
       "name": "Arthur Zhang",
       "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
-    }
+    },
+    "presentation": {
+      "accent": "#ffc77b",
+      "tag": "THE FLOATING GARDENS",
+      "length": "Play at your pace",
+      "input": "Mouse or touch",
+      "note": "Four garden worlds, twelve islands, and a satchel full of possibilities.",
+      "repo": "myelin-sling"
+    },
+    "sourceUrl": "https://github.com/UTXOPlay/myelin-sling",
+    "replayDescription": "Your progress saves as you play. Replay and export your session inside the game."
   },
   {
     "id": "chess",
@@ -252,10 +327,10 @@
     "cover": "/assets/chess-cover.webp?v=0.21.0",
     "version": "1.1.0",
     "controls": "Tap or drag pieces. Invite a friend to an online table, share this device, or choose a Stockfish opponent inside the game menu.",
-    "players": "1\u20132 online or local",
+    "players": "1–2 online or local",
     "headline": "Your next|brilliant move.",
     "heroDescription": "A blue-hour salon. Ivory and jade pieces. A friend across the internet, or Stockfish across the board.",
-    "caption": "THE QUIET BOARD \u00b7 BLUE HOUR CLUB",
+    "caption": "THE QUIET BOARD · BLUE HOUR CLUB",
     "myelin": {
       "based": true,
       "evidence": "host-replay",
@@ -268,7 +343,17 @@
     "publisher": {
       "name": "Arthur Zhang",
       "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
-    }
+    },
+    "presentation": {
+      "accent": "#d9c18a",
+      "tag": "THE BLUE HOUR CLUB",
+      "length": "Play at your pace",
+      "input": "Mouse or touch",
+      "note": "Invite a friend. Share a table. Challenge Stockfish.",
+      "repo": "myelin-chess"
+    },
+    "sourceUrl": "https://github.com/UTXOPlay/myelin-chess",
+    "replayDescription": "Your progress saves as you play. Replay and export your session inside the game."
   },
   {
     "id": "rune-foundry",
@@ -276,15 +361,14 @@
     "subtitle": "A little order. A beautiful chain.",
     "genre": "Puzzle",
     "mode": "Single-player",
-    "runtime": "atelier",
     "description": "Connect four matching runes. Chain reactions earn energy; spend three to reforge the bottom row. Clear 288 runes across twelve increasingly fast stages.",
     "cover": "/assets/rune-foundry-keyart.webp",
     "version": "0.1.0",
-    "controls": "\u2190 \u2192 move \u00b7 \u2191 rotate \u00b7 \u2193 drop \u00b7 Space reforge. On touch, use the in-scene controls or swipe; tap the board to rotate.",
+    "controls": "← → move · ↑ rotate · ↓ drop · Space reforge. On touch, use the in-scene controls or swipe; tap the board to rotate.",
     "players": "1 player",
     "headline": "A little order.|A beautiful chain.",
     "heroDescription": "Connect four matching runes. Chain reactions earn energy; spend three to reforge the bottom row. Clear 288 runes across twelve increasingly fast stages.",
-    "caption": "RUNE FOUNDRY \u00b7 THE ALCHEMIST\u2019S WORKSHOP",
+    "caption": "RUNE FOUNDRY · THE ALCHEMIST’S WORKSHOP",
     "myelin": {
       "based": true,
       "version": "0.31.0",
@@ -298,7 +382,17 @@
     "publisher": {
       "name": "Arthur Zhang",
       "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
-    }
+    },
+    "presentation": {
+      "accent": "#ffcd8d",
+      "tag": "THE ALCHEMIST’S WORKSHOP",
+      "length": "12 escalating stages",
+      "input": "Keyboard + touch",
+      "note": "Match runes. Build chains. Reforge your fate.",
+      "repo": "myelin-atelier"
+    },
+    "sourceUrl": "https://github.com/UTXOPlay/myelin-atelier",
+    "replayDescription": "Your progress saves as you play. Replay and export your session inside the game."
   },
   {
     "id": "lumen-weave",
@@ -306,7 +400,6 @@
     "subtitle": "Two rotations. One living circuit.",
     "genre": "Puzzle",
     "mode": "Single-player",
-    "runtime": "atelier",
     "description": "Light all 36 nodes from the golden source. Every clockwise rotation turns the opposite node counterclockwise. Restore twenty-four different, solvable networks.",
     "cover": "/assets/lumen-weave-keyart.webp",
     "version": "0.1.0",
@@ -314,7 +407,7 @@
     "players": "1 player",
     "headline": "Two rotations.|One living circuit.",
     "heroDescription": "Light all 36 nodes from the golden source. Every clockwise rotation turns the opposite node counterclockwise. Restore twenty-four different, solvable networks.",
-    "caption": "LUMEN WEAVE \u00b7 THE TWIN-LIGHT OBSERVATORY",
+    "caption": "LUMEN WEAVE · THE TWIN-LIGHT OBSERVATORY",
     "myelin": {
       "based": true,
       "version": "0.31.0",
@@ -328,7 +421,17 @@
     "publisher": {
       "name": "Arthur Zhang",
       "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
-    }
+    },
+    "presentation": {
+      "accent": "#a8e5ff",
+      "tag": "TWIN-LIGHT OBSERVATORY",
+      "length": "24 solvable networks",
+      "input": "Keyboard + touch",
+      "note": "Two rotations. One living circuit.",
+      "repo": "myelin-atelier"
+    },
+    "sourceUrl": "https://github.com/UTXOPlay/myelin-atelier",
+    "replayDescription": "Your progress saves as you play. Replay and export your session inside the game."
   },
   {
     "id": "orbit-courier",
@@ -336,15 +439,14 @@
     "subtitle": "Precious cargo. Perfect timing.",
     "genre": "Arcade",
     "mode": "Single-player",
-    "runtime": "atelier",
     "description": "Collect up to three capsules on the outer orbits and deliver them to the golden inner dock. Hop rings, vary your speed and phase across the planet to survive twelve routes.",
     "cover": "/assets/orbit-courier-keyart.webp",
     "version": "0.1.0",
-    "controls": "\u2190 \u2192 hop inward / outward \u00b7 \u2191 brake \u00b7 \u2193 boost \u00b7 Space phase-hop for two energy. Touch controls stay inside the scene.",
+    "controls": "← → hop inward / outward · ↑ brake · ↓ boost · Space phase-hop for two energy. Touch controls stay inside the scene.",
     "players": "1 player",
     "headline": "Precious cargo.|Perfect timing.",
     "heroDescription": "Collect up to three capsules on the outer orbits and deliver them to the golden inner dock. Hop rings, vary your speed and phase across the planet to survive twelve routes.",
-    "caption": "ORBIT COURIER \u00b7 SPECIAL DELIVERY / OUTER WORLDS",
+    "caption": "ORBIT COURIER · SPECIAL DELIVERY / OUTER WORLDS",
     "myelin": {
       "based": true,
       "version": "0.31.0",
@@ -358,7 +460,17 @@
     "publisher": {
       "name": "Arthur Zhang",
       "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
-    }
+    },
+    "presentation": {
+      "accent": "#a9efe7",
+      "tag": "SPECIAL DELIVERY",
+      "length": "12 orbital routes",
+      "input": "Keyboard + touch",
+      "note": "Precious cargo. Perfect timing.",
+      "repo": "myelin-atelier"
+    },
+    "sourceUrl": "https://github.com/UTXOPlay/myelin-atelier",
+    "replayDescription": "Your progress saves as you play. Replay and export your session inside the game."
   },
   {
     "id": "mosslight",
@@ -366,7 +478,6 @@
     "subtitle": "Leave a light. Lead them home.",
     "genre": "Strategy",
     "mode": "Single-player",
-    "runtime": "atelier",
     "description": "Gather every golden seed in twelve gardens. Guards move when you move. Plant a lantern for two energy: it lures guards into four rays of light for three turns. Stone blocks the light.",
     "cover": "/assets/mosslight-keyart.webp",
     "version": "0.1.0",
@@ -374,7 +485,7 @@
     "players": "1 player",
     "headline": "Leave a light.|Lead them home.",
     "heroDescription": "Gather every golden seed in twelve gardens. Guards move when you move. Plant a lantern for two energy: it lures guards into four rays of light for three turns. Stone blocks the light.",
-    "caption": "MOSSLIGHT \u00b7 THE LANTERN GARDENS",
+    "caption": "MOSSLIGHT · THE LANTERN GARDENS",
     "myelin": {
       "based": true,
       "version": "0.31.0",
@@ -388,6 +499,16 @@
     "publisher": {
       "name": "Arthur Zhang",
       "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
-    }
+    },
+    "presentation": {
+      "accent": "#c7ebaf",
+      "tag": "THE LANTERN GARDENS",
+      "length": "12 living gardens",
+      "input": "Keyboard + touch",
+      "note": "Leave a light. Lead them home.",
+      "repo": "myelin-atelier"
+    },
+    "sourceUrl": "https://github.com/UTXOPlay/myelin-atelier",
+    "replayDescription": "Your progress saves as you play. Replay and export your session inside the game."
   }
 ]

@@ -17,8 +17,8 @@ test('network failures and timeouts have actionable messages, server validation 
  assert.match(apiError(new DOMException('timeout','TimeoutError')),/try again/);
  assert.equal(apiError(new Error('Use an HTTPS URL.')),'Use an HTTPS URL.');
 });
-test('every bundled game owns its viewport and loads its current interface',()=>{
- for(const game of games){const html=readFileSync(new URL(`../games/${game.id}/web/index.html`,import.meta.url),'utf8');if(game.id==='neon-miner'){assert.match(html,/data-surface="miner"/);assert.match(html,/id="game-menu"/);assert.match(html,/app\.mjs\?v=0\.16\.0/);}else if(game.runtime==='atelier'){assert.match(html,/data-surface="atelier"/);assert.match(html,/id="game-menu"/);assert.match(html,/\/atelier\/app\.mjs/);}else assert.match(html,/\/game-shell\.js\?v=0\.14\.0/);}
+test('curated listings identify independent game sources and presentation metadata',()=>{
+ for(const game of games){assert.match(game.sourceUrl,/^https:\/\/github.com\/UTXOPlay\/myelin-/);assert.ok(game.presentation.accent);assert.ok(game.replayDescription);}
 });
 
 test('wallet button distinguishes authentication phases and never treats a selected signer as login',async()=>{

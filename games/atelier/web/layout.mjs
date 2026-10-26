@@ -1,2 +1,0 @@
-export function viewport(w,h,kind){const logicalWidth={'rune-foundry':480,'lumen-weave':760,'orbit-courier':820,mosslight:900}[kind],top=h<500?72:112,bottom=h<500?76:120,scale=Math.max(.05,Math.min((w-24)/logicalWidth,(h-top-bottom)/1000));return{scale,x:w/2-500*scale,y:top+(h-top-bottom-1000*scale)/2};}
-export function pointer(x,y,rect,kind){const v=viewport(rect.width,rect.height,kind);return{x:(x-rect.left-v.x)/v.scale,y:(y-rect.top-v.y)/v.scale};}

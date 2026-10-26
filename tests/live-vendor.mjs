@@ -97,7 +97,7 @@ try {
     runtimeToken: process.env.RUNTIME_TOKEN,
     myelinVersion: "local-integration",
     sessionSecret: randomBytes(32).toString("hex"),
-    webRoot: path.resolve("games/chess/web"),
+    webRoot: path.resolve(process.env.VENDOR_TEST_WEB_ROOT || "../myelin-chess/dist/chess"),
     secureCookies: false,
   });
   adapterServer = adapter.app.listen(0, "127.0.0.1");
