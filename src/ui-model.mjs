@@ -85,3 +85,18 @@ export function filterCreatorGames(games, {query="", genre="All games", freeOnly
     (sort === "az" ? 1 : -1) * (a.title.localeCompare(b.title, "en", {sensitivity:"base",numeric:true}) || a.id.localeCompare(b.id)));
   return filtered;
 }
+
+// A fresh deck gives every curated game one turn. Avoid a repeated first card
+// across visits or at a cycle boundary without biasing the remaining order.
+export function shuffleFeatured(games, previous, random = Math.random) {
+  const ids = [...new Set(games.filter(game => !game.vendor).map(game => game.id))];
+  for (let i = ids.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [ids[i], ids[j]] = [ids[j], ids[i]];
+  }
+  if (ids.length > 1 && ids[0] === previous) {
+    const j = 1 + Math.floor(random() * (ids.length - 1));
+    [ids[0], ids[j]] = [ids[j], ids[0]];
+  }
+  return ids;
+}

@@ -161,74 +161,57 @@ export function GameCredits({ game, compact = false, linked = true }) {
 }
 export function GameCard({ g, onPlay, onDetails, launching, updated }) {
   const meta = g.presentation || { accent: "#8bf4b9", length: "Publisher hosted" };
+  const [preview, setPreview] = useState(false);
+  const previewId = useId();
+  const timer = useRef(null);
+  const overview = useRef(null);
+  const cancelPreview = () => { clearTimeout(timer.current); setPreview(false); };
+  useEffect(() => () => clearTimeout(timer.current), []);
+  const action = launching === g.id ? "Opening…" : updated ? "Play again" : g.pricing === "paid" ? "View & buy" : "Play now";
   return (
     <motion.article
       layout
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.22 }}
-      className={"game-card " + g.id}
+      className={"game-card compact-card " + g.id + (preview ? " is-previewing" : "")}
       style={{ "--accent": meta.accent }}
+      onPointerEnter={event => {
+        if (event.pointerType !== "mouse") return;
+        clearTimeout(timer.current);
+        timer.current = setTimeout(() => setPreview(true), 180);
+      }}
+      onPointerLeave={() => {
+        clearTimeout(timer.current);
+        if (!overview.current?.matches(":focus-visible")) setPreview(false);
+      }}
+      onKeyDown={event => { if (event.key === "Escape") cancelPreview(); }}
     >
-      <button className="card-overview" onClick={() => onDetails(g)} aria-label={"View " + g.title + " details"}>
+      <button ref={overview} className="card-overview" onClick={() => { cancelPreview(); onDetails(g); }}
+        onFocus={event => { if (event.target.matches(":focus-visible")) setPreview(true); }}
+        onBlur={cancelPreview}
+        aria-label={"View " + g.title + " details"} aria-describedby={preview ? previewId : undefined}>
         <span className="cover-button">
           <img src={g.cover} alt="" loading="lazy" />
-          <span className="card-badge">{g.genre}</span>
-          <MyelinBadge game={g} />
-          <span className="card-explore">Details <ArrowUpRight size={17} /></span>
+          <span id={previewId} className="card-preview" aria-hidden={!preview}>
+            <span className="preview-genre">{g.genre}</span>
+            <span className="preview-description">{g.description || g.subtitle}</span>
+            <span className="preview-facts"><span><Users size={13} />{g.players}</span><span><Clock size={13} />{meta.length}</span></span>
+            <span className="preview-details">View details <ArrowUpRight size={14} /></span>
+          </span>
         </span>
         <span className="game-card-info">
-          <span className="card-copy">
-            <span className="card-title" role="heading" aria-level="3">{g.title}</span>
-            <span className="card-subtitle">{g.subtitle}</span>
-          </span>
+          <span className="card-title" role="heading" aria-level="3">{g.title}</span>
           <span className={"price" + (g.pricing !== "paid" ? " price-free" : "")}>
             {g.pricing === "paid" ? g.priceCkb + " CKB" : "FREE"}
           </span>
         </span>
       </button>
-      <GameCredits game={g} compact />
-      <div className="card-meta">
-        <span>
-          <Users size={14} />
-          {g.players}
-        </span>
-        <span>
-          <Clock size={14} />
-          {meta.length}
-        </span>
-      </div>
-      <div className="card-actions">
-        <button
-          className="card-launch"
-          disabled={!!launching}
-          onClick={() => onPlay(g.id)}
-        >
-          {launching === g.id ? (
-            <Spinner />
-          ) : (
-            <Play size={14} fill="currentColor" />
-          )}
-          {launching === g.id
-            ? "Opening…"
-            : updated
-              ? "Play again"
-              : g.pricing === "paid"
-                ? "View & buy"
-                : "Play now"}
-          <ArrowUpRight size={15} />
-        </button>
-      </div>
-      {updated && (
-        <p className="last-played">
-          <Clock size={12} />
-          Last played{" "}
-          {new Date(updated).toLocaleDateString(undefined, {
-            month: "short",
-            day: "numeric",
-          })}
-        </p>
-      )}
+      <button className="card-launch" disabled={!!launching} onClick={() => onPlay(g.id)}
+        aria-label={action + " · " + g.title} title={action}>
+        {launching === g.id ? <Spinner /> : g.pricing === "paid" ? <ArrowUpRight size={17} /> : <Play size={16} fill="currentColor" />}
+      </button>
+      {updated && <p className="last-played"><Clock size={12} />Last played {new Date(updated).toLocaleDateString(undefined, { month: "short", day: "numeric" })}</p>}
     </motion.article>
   );
 }

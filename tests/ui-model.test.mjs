@@ -89,3 +89,24 @@ test('collection search combines filters, sorts titles naturally and preserves s
  assert.deepEqual(filterCreatorGames(sample).map(g=>g.id),['z','a','b']);
  assert.deepEqual(sample,original);
 });
+
+test('featured decks shuffle without duplicates, vendors or an immediate repeat', async () => {
+ const {shuffleFeatured}=await import('../src/ui-model.mjs');
+ const source=[...games,{id:'vendor-demo',vendor:true},games[0]], original=structuredClone(source);
+ const firsts=new Set();
+ for(let seed=1;seed<=40;seed++){
+  let state=seed;const random=()=>((state=(state*1664525+1013904223)>>>0)/2**32);
+  const deck=shuffleFeatured(source,'prism-breaker',random);
+  assert.equal(deck.length,games.length);
+  assert.deepEqual([...deck].sort(),games.map(g=>g.id).sort());
+  assert.notEqual(deck[0],'prism-breaker');firsts.add(deck[0]);
+  const next=shuffleFeatured(source,deck.at(-1),random);
+  assert.notEqual(next[0],deck.at(-1));
+ }
+ assert.ok(firsts.size>5,'visits do not share one fixed starting game');
+ assert.deepEqual(source,original);
+ assert.deepEqual(shuffleFeatured([]),[]);
+ assert.deepEqual(shuffleFeatured([games[0]],games[0].id),[games[0].id]);
+ // Force the repeated-first branch and verify it still covers every game.
+ assert.notEqual(shuffleFeatured(games,games[0].id,()=>.999)[0],games[0].id);
+});

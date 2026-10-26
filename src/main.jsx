@@ -57,6 +57,7 @@ import {
   selectGames,
   walletButtonState,
   apiError,
+  shuffleFeatured,
 } from "./ui-model.mjs";
 import "./style.css";
 import {createWalletSession, disconnectWallet} from "./wallet-session.mjs";
@@ -200,7 +201,12 @@ function App({ walletApi }) {
   const [query, setQuery] = useState(""),
     [genre, setGenre] = useState("All games"),
     [mode, setMode] = useState("all"),
-    [featured, setFeatured] = useState("prism-breaker");
+    [featured, setFeatured] = useState(() => {
+      let previous;
+      try { previous = sessionStorage.getItem("utxoplay:last-featured"); } catch {}
+      const order = shuffleFeatured(initialGames, previous);
+      return { order, id: order[0] };
+    });
   const [toast, setToast] = useState(null),
     [dialog, setDialog] = useState(null),
     [details, setDetails] = useState(null),
@@ -251,9 +257,31 @@ function App({ walletApi }) {
       games.find((g) => page === "/play/" + g.id) ||
       libraryGames.find((g) => page === "/play/" + g.id) ||
       (remoteGame && page === "/play/" + remoteGame.id ? remoteGame : null),
-    hero = featuredGames.find((g) => g.id === featured) || featuredGames[0],
+    hero = featuredGames.find((g) => g.id === featured.id) || featuredGames[0],
     signedIn = !!user && !user.guest;
   const activeGame = !!(game && !game.vendor && user && !loadingUser);
+  // Preserve the shuffled deck when the API refreshes the same catalog.
+  useEffect(() => {
+    setFeatured(current => {
+      const eligible = games.filter(g => !g.vendor).map(g => g.id);
+      const kept = current.order.filter(id => eligible.includes(id));
+      const added = shuffleFeatured(games.filter(g => !kept.includes(g.id)));
+      const order = [...kept, ...added];
+      return { order, id: order.includes(current.id) ? current.id : order[0] };
+    });
+  }, [games]);
+  useEffect(() => {
+    try { if (hero) sessionStorage.setItem("utxoplay:last-featured", hero.id); } catch {}
+  }, [hero?.id]);
+  function nextFeatured() {
+    setFeatured(current => {
+      const index = current.order.indexOf(current.id);
+      if (index < current.order.length - 1) return { ...current, id: current.order[index + 1] };
+      const order = shuffleFeatured(games, current.id);
+      return { order, id: order[0] };
+    });
+  }
+
   useEffect(() => {
     let live = true;
     setRemoteGame(null);
@@ -767,23 +795,13 @@ function App({ walletApi }) {
                         {hero.myelin?.based && <span className="myelin-badge"><img src="/assets/myelin-logo.png?v=0.7.1" alt="" />MYELIN</span>}
                       </span>
                       <span className="hero-index">
-                        {String(featuredGames.findIndex((g) => g.id === hero.id) + 1).padStart(2, '0')}
+                        {String(featured.order.indexOf(hero.id) + 1).padStart(2, '0')}
                         <i> / {String(featuredGames.length).padStart(2, '0')}</i>
                       </span>
                       <button
                         className="hero-next icon-btn"
                         aria-label="Next featured game"
-                        onClick={() =>
-                          setFeatured(
-                            featuredGames[
-                              (featuredGames.findIndex(
-                                (g) => g.id === hero.id,
-                              ) +
-                                1) %
-                                featuredGames.length
-                            ].id,
-                          )
-                        }
+                        onClick={nextFeatured}
                       >
                         <ArrowRight size={18} />
                       </button>
