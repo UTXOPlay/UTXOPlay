@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "vite build && node tools/precompress.mjs",
+    "build": "vite build && node tools/canonical-game-pages.mjs && node tools/precompress.mjs",
     "start": "node server/index.mjs",
     "test": "node --test tests/*.test.mjs",
     "dev:platform": "node scripts/dev-platform.mjs"

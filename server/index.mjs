@@ -1,4 +1,5 @@
 import express from 'express';
+import {installGamePages} from './game-pages.mjs';
 import {installNightshiftRoutes} from './nightshift-routes.mjs';
 
 import {installCommunity} from './community.mjs';
@@ -32,6 +33,7 @@ export function createApp({dataDir=process.env.DATA_DIR||path.join(root,'data'),
  // In-flight verification belongs to this server process and cannot survive a restart.
  const pendingLogins=new Set();
  const app=express(); app.disable('x-powered-by'); app.set('trust proxy',1);
+ installGamePages(app);
  installNightshiftRoutes(app);
  const secure=origin.startsWith('https:');
  const cookie=(res,name,value,maxAge)=>res.cookie(name,value,{httpOnly:true,secure,sameSite:'lax',path:'/',maxAge});

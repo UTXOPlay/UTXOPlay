@@ -1,0 +1,9 @@
+# Canonical game pages
+
+All store game navigation uses `/games/<slug>/`. NIGHTSHIFT uses `/games/nightshift/` while its permanent catalog/account ID remains `drift-run`. Other curated and vendor IDs retain their existing slug. Old `/play/<id>` roots return HTTP 308 and retain the query.
+
+The store serves its existing account/launch document for top-level HTML navigation at a game root. Embedded frames and launch/review requests continue to the authenticated game gateway; API and asset subpaths are unchanged. `Vary: Accept, Sec-Fetch-Dest` distinguishes document responses. Install `installGamePages` before the existing NIGHTSHIFT alias and gateway. The game loader keeps its stable protocol ID, so browser libraries, purchases, saved careers and iframe handshakes retain their identity.
+
+`shared/game-paths.mjs` owns path/ID conversion. Frontend sources use this helper for game matching and launch links; vendor API lookups parse the path instead of using a fixed substring offset. The build includes an AST migration pass for retained compiled modules. It can also create a narrow overlay for an already-deployed frontend: only route expressions and vendor lookups change, affected chunks get new names, references propagate through the reachable module graph, compressed variants are regenerated and old immutable assets remain available. It does not rebuild unrelated unpublished store features.
+
+Validation covers helper semantics, redirect/query handling, document versus iframe/API routing, AST execution and unchanged unrelated substring expressions. The isolated origin/main source build passed, as did gateway, alias and route tests. Staging browser checks covered the legacy NIGHTSHIFT guest entry, its canonical embedded frame, a second game (chess), vendor fallback and absence of legacy homepage links. Production uses the latest running image as the overlay base and preserves all other catalog entries and CSS.

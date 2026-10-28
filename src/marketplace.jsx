@@ -1,3 +1,4 @@
+import {canonicalGamePath} from '../shared/game-paths.mjs';
 import React, { useEffect, useState, useRef } from "react";
 import "./marketplace.css";
 import {sameDraft, reconcileSavedDraft, creditChanges, missingCreditNames} from "./publishing-model.mjs";
@@ -256,7 +257,7 @@ export function Studio({ user, onConnect, onCatalogChange }) {
                   <ArrowRight size={15} />
                 </button>
                 {p.live && (
-                  <a className="text-link" href={"/play/vendor-" + p.id}>
+                  <a className="text-link" href={canonicalGamePath("vendor-" + p.id)}>
                     View game <ExternalLink size={14} />
                   </a>
                 )}

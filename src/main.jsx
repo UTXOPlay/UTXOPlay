@@ -1,3 +1,4 @@
+import {canonicalGamePath,gameIdFromPath} from '../shared/game-paths.mjs';
 import React, {
   useState,
   useEffect,
@@ -254,9 +255,9 @@ function App({ walletApi }) {
     .filter((g) => g.id);
   const featuredGames = games.filter((g) => !g.vendor);
   const game =
-      games.find((g) => page === "/play/" + g.id) ||
-      libraryGames.find((g) => page === "/play/" + g.id) ||
-      (remoteGame && page === "/play/" + remoteGame.id ? remoteGame : null),
+      games.find((g) => page === canonicalGamePath(g.id)) ||
+      libraryGames.find((g) => page === canonicalGamePath(g.id)) ||
+      (remoteGame && page === canonicalGamePath(remoteGame.id) ? remoteGame : null),
     hero = featuredGames.find((g) => g.id === featured.id) || featuredGames[0],
     signedIn = !!user && !user.guest;
   const activeGame = !!(game && !game.vendor && user && !loadingUser);
@@ -285,12 +286,12 @@ function App({ walletApi }) {
   useEffect(() => {
     let live = true;
     setRemoteGame(null);
-    if (!page.startsWith("/play/vendor-")) {
+    if (!page.startsWith("/games/vendor-")) {
       setVendorLoading(false);
       return;
     }
     setVendorLoading(true);
-    api("/api/games/" + page.slice(6))
+    api("/api/games/" + gameIdFromPath(page))
       .then((d) => {
         if (live) setRemoteGame(d.game);
       })
@@ -375,7 +376,7 @@ function App({ walletApi }) {
             : page === "/purchases"
               ? "Purchases"
               : "Good games. Yours to play.") + " · UTXOPlay";
-    if (!page.startsWith("/play/")) exitFullscreen();
+    if (!page.startsWith("/games/")) exitFullscreen();
     mainRef.current?.focus({ preventScroll: true });
   }, [page, game?.title]);
   useEffect(() => {
@@ -405,7 +406,7 @@ function App({ walletApi }) {
     const onKey = (e) => {
       if (
         e.defaultPrevented ||
-        page.startsWith("/play/") ||
+        page.startsWith("/games/") ||
         dialog ||
         details ||
         isOpen ||
@@ -569,7 +570,7 @@ function App({ walletApi }) {
         setUser(result.user);
       }
       setDetails(null);
-      go("/play/" + id);
+      go(canonicalGamePath(id));
     } catch (e) {
       notify(apiError(e), "error");
     } finally {
@@ -1130,16 +1131,16 @@ function App({ walletApi }) {
                 <div className="empty">
                   <Gamepad2 size={38} />
                   <h1>
-                    {page.startsWith("/play/vendor-")
+                    {page.startsWith("/games/vendor-")
                       ? "This game isn’t currently listed."
                       : "This page took a wrong turn."}
                   </h1>
                   <p>
-                    {page.startsWith("/play/vendor-")
+                    {page.startsWith("/games/vendor-")
                       ? "If you already own it, sign in with your purchasing wallet and open your library."
                       : "There are better adventures in the store."}
                   </p>
-                  {page.startsWith("/play/vendor-") && !signedIn && (
+                  {page.startsWith("/games/vendor-") && !signedIn && (
                     <button className="outline" onClick={connect}>
                       Connect purchasing wallet
                     </button>

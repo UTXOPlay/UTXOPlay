@@ -156,18 +156,18 @@
   },
   {
     "id": "drift-run",
-    "title": "Drift Run",
-    "subtitle": "Leave an echo. Steal a second line.",
-    "genre": "Arcade",
+    "title": "NIGHTSHIFT",
+    "subtitle": "Circuit handling. Own the corners.",
+    "genre": "Racing",
     "mode": "Single-player",
-    "description": "A lane change leaves an echo that catches rings behind you. Echo pickups and close passes charge a brief Overdrive that smashes barriers. Plan two lanes at once as the city accelerates.",
-    "cover": "/assets/drift-run-keyart.webp",
-    "version": "0.3.0",
-    "controls": "A/D, arrows, swipes or in-scene arrows change lanes. Space or OVERDRIVE spends three earned charges on a burst.",
+    "description": "Twelve winding 3–7 minute courses, six cars and a signed solo career. Race switchbacks, chicanes, river esses and banked skyways. Glancing contact exchanges momentum; heavy impacts consume armor. Race, counter and secure distinct relay targets.",
+    "cover": "/assets/nightshift-keyart.webp",
+    "version": "9.0.0",
+    "controls": "Choose QWERTY, Colemak or custom bindings from the keyboard icon. Colemak: A/S steer, R brake/drift, F fire, Q counter, Space nitrous, Z reverse. Arrows always steer. Touch uses the thumb stick and icons.",
     "players": "1 player",
-    "headline": "Leave an echo.|Steal a second line.",
-    "heroDescription": "A lane change leaves an echo that catches rings behind you. Echo pickups and close passes charge a brief Overdrive that smashes barriers. Plan two lanes at once as the city accelerates.",
-    "caption": "DRIFT RUN · AFTER HOURS",
+    "headline": "Twelve roads.|Own your line.",
+    "heroDescription": "Twelve Nervos-inspired environments with continuous winding roads, elevation, previews and a matching live minimap. Version 9 adds swept contacts, mass-weighted impulses and layout-aware controls. Verified Season 8 careers carry forward; unfinished saved events keep their original rules. Solo racing; multiplayer remains future work.",
+    "caption": "NIGHTSHIFT · WORLD CIRCUIT",
     "myelin": {
       "based": true,
       "version": "0.31.0",
@@ -176,22 +176,29 @@
     },
     "developer": {
       "name": "Arthur Zhang",
-      "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
+      "address": "ckb1qrgqep8saj8agswr30pls73hra28ry8jlnlc3ejzh3dl2ju7xxpjxqgqq945mu2jzws7pvj3neznhhwnzxvxyz88zqcrn9xr"
     },
     "publisher": {
       "name": "Arthur Zhang",
-      "address": "ckb1qzda0cr08m85hc8jlnfp3zer7xulejywt49kt2rr0vthywaa50xwsq238rvp7e36zawvdqruc5mpctgz6v95ngc4628yc"
+      "address": "ckb1qrgqep8saj8agswr30pls73hra28ry8jlnlc3ejzh3dl2ju7xxpjxqgqq945mu2jzws7pvj3neznhhwnzxvxyz88zqcrn9xr"
     },
     "presentation": {
-      "accent": "#ffbc83",
-      "tag": "AFTER HOURS",
-      "length": "Quick arcade runs",
-      "input": "Keyboard + touch",
-      "note": "Leave an echo. Steal a second line.",
-      "repo": "myelin-arcade"
+      "accent": "#91dbe0",
+      "tag": "WORLD CIRCUIT",
+      "length": "3–7 minute races",
+      "input": "Keyboard + drag + joystick",
+      "note": "Race. Counter. Carry the relay.",
+      "repo": "NIGHTSHIFT"
     },
-    "sourceUrl": "https://github.com/UTXOPlay/myelin-arcade",
-    "replayDescription": "Your progress saves as you play. Replay and export your session inside the game."
+    "sourceUrl": "https://github.com/UTXOPlay/NIGHTSHIFT",
+    "replayDescription": "Version 9 binds course profiles, contact physics, economy and verified Season 8 career origins to its exact native application profile. Older exports retain their original verifier. Myelin provides off-chain host replay, not CKB settlement.",
+    "tags": [
+      "arcade",
+      "racing",
+      "singleplayer",
+      "vehicle-combat",
+      "career"
+    ]
   },
   {
     "id": "botstrike",
