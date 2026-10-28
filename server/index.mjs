@@ -1,4 +1,5 @@
 import express from 'express';
+import {installNightshiftRoutes} from './nightshift-routes.mjs';
 
 import {installCommunity} from './community.mjs';
 import {optimizedStatic} from './static.mjs';
@@ -31,6 +32,7 @@ export function createApp({dataDir=process.env.DATA_DIR||path.join(root,'data'),
  // In-flight verification belongs to this server process and cannot survive a restart.
  const pendingLogins=new Set();
  const app=express(); app.disable('x-powered-by'); app.set('trust proxy',1);
+ installNightshiftRoutes(app);
  const secure=origin.startsWith('https:');
  const cookie=(res,name,value,maxAge)=>res.cookie(name,value,{httpOnly:true,secure,sameSite:'lax',path:'/',maxAge});
  function cookies(req) {return Object.fromEntries((req.headers.cookie||'').split(';').map(s=>s.trim().split('=')).filter(v=>v.length===2));}
