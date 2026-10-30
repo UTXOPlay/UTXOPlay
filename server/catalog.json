@@ -162,7 +162,7 @@
     "mode": "Single-player",
     "description": "Twelve winding courses, three campaign chapters and six cars. Earn reputation to unlock cars and parts, then allocate a six-point build. Race, escape, drift and intercept through staged objectives and closing battles. Earn real Relay Credits with itemized first-clear, chapter and sector rewards.",
     "cover": "/assets/nightshift-keyart.webp",
-    "version": "13.1.0",
+    "version": "13.1.1",
     "controls": "W accelerates, S brakes, A/D steer, X handbrakes, Z reverses; all actions are remappable. Colemak and arrow pedals supported. Touch uses an analogue thumb stick. Standard controllers: RT gas, LT brake/reverse, B handbrake, A nitrous.",
     "players": "1 player",
     "headline": "Twelve roads.|Own your line.",
