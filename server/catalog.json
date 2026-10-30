@@ -157,16 +157,16 @@
   {
     "id": "drift-run",
     "title": "NIGHTSHIFT",
-    "subtitle": "Circuit handling. Own the corners.",
+    "subtitle": "Earn your crew. Build your line.",
     "genre": "Racing",
     "mode": "Single-player",
-    "description": "Twelve winding courses, six handling builds and a signed solo career. Manage independent accelerator and brake pedals, coast into corners and power out. Master four-sector drift challenges or race your verified personal ghost in a stock time attack.",
+    "description": "Twelve winding courses, three campaign chapters and six cars. Earn reputation to unlock cars and parts, then allocate a six-point build. Race, escape, drift and intercept through staged objectives and closing battles. Earn real Relay Credits with itemized first-clear, chapter and sector rewards.",
     "cover": "/assets/nightshift-keyart.webp",
-    "version": "12.0.1",
+    "version": "13.0.0",
     "controls": "W accelerates, S brakes, A/D steer, X handbrakes, Z reverses; all actions are remappable. Colemak and arrow pedals supported. Touch uses an analogue thumb stick. Standard controllers: RT gas, LT brake/reverse, B handbrake, A nitrous.",
     "players": "1 player",
     "headline": "Twelve roads.|Own your line.",
-    "heroDescription": "Launch from rest, find the grip and control your exits with separate gas, brake, handbrake and nitrous. Race twelve circuits, earn upgrades and chase your personal best. Six handling builds use five licensed vehicle bodies. Solo racing; older signed races retain their original rules.",
+    "heroDescription": "Earn your crew license across three chapters. Reconfigure permanent purchased parts within a six-point budget, then carry your relay through twelve circuits. Finish with a clean drift exit or secure the final interception target and a podium. Solo racing with verified career carry.",
     "caption": "NIGHTSHIFT \u00b7 WORLD CIRCUIT",
     "myelin": {
       "based": true,
@@ -191,7 +191,7 @@
       "repo": "NIGHTSHIFT"
     },
     "sourceUrl": "https://github.com/UTXOPlay/NIGHTSHIFT",
-    "replayDescription": "V12 binds proportional steering, gas, brake, career economy and verified predecessor proofs to its exact native application profile. Older races and exports keep their original executors. Myelin provides off-chain host replay, not CKB settlement.",
+    "replayDescription": "V13 binds campaign licenses, purchased parts, active builds, staged objectives and career rewards to its exact native application profile. V8\u2013V12 races and exports keep their original executors. Historical PBs are separate from current-rule records. Myelin provides off-chain host replay, not CKB settlement.",
     "tags": [
       "arcade",
       "racing",
