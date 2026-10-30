@@ -160,9 +160,9 @@
     "subtitle": "Earn your crew. Build your line.",
     "genre": "Racing",
     "mode": "Single-player",
-    "description": "Twelve winding courses, three campaign chapters and six cars. Earn reputation to unlock cars and parts, then allocate a six-point build. Race, escape, drift and intercept through staged objectives and closing battles. Earn real Relay Credits with itemized first-clear, chapter and sector rewards.",
+    "description": "Twelve winding courses, three campaign chapters and six cars. Race against rivals that share your driving physics. Read cover, counter energy attacks and intercept loaded couriers. Earn Relay Credits, unlock permanent parts and tune a six-point build.",
     "cover": "/assets/nightshift-keyart.webp",
-    "version": "13.1.1",
+    "version": "14.0.0",
     "controls": "W accelerates, S brakes, A/D steer, X handbrakes, Z reverses; all actions are remappable. Colemak and arrow pedals supported. Touch uses an analogue thumb stick. Standard controllers: RT gas, LT brake/reverse, B handbrake, A nitrous.",
     "players": "1 player",
     "headline": "Twelve roads.|Own your line.",
@@ -191,7 +191,7 @@
       "repo": "NIGHTSHIFT"
     },
     "sourceUrl": "https://github.com/UTXOPlay/NIGHTSHIFT",
-    "replayDescription": "V13 binds campaign licenses, purchased parts, active builds, staged objectives and career rewards to its exact native application profile. V8–V12 races and exports keep their original executors. Historical PBs are separate from current-rule records. Myelin provides off-chain host replay, not CKB settlement.",
+    "replayDescription": "V14 binds shared driver physics, rival tactics, clear-path EMP, relay couriers, builds and career rewards to its exact native application profile. Unfinished V8–V13 races keep their original executors until a new event explicitly carries the verified career forward. Historical PBs stay separate. Myelin provides off-chain host replay, not CKB settlement.",
     "tags": [
       "arcade",
       "racing",
