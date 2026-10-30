@@ -16,7 +16,7 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const version=JSON.parse(readFileSync(path.join(root,'package.json'),'utf8')).version;
 export const games=JSON.parse(readFileSync(path.join(root,'server/catalog.json'),'utf8'));
 
-export function createApp({dataDir=process.env.DATA_DIR||path.join(root,'data'), origin=process.env.PUBLIC_ORIGIN||'http://127.0.0.1:8790', verify=verifyWallet, runtimeFetch=fetch, assetFetch=fetch, gameServices=loadIntegrations(), catalog=games, marketplaceOptions={}}={}) {
+export function createApp({dataDir=process.env.DATA_DIR||path.join(root,'data'), origin=process.env.PUBLIC_ORIGIN||'http://127.0.0.1:8790', verify=verifyWallet, runtimeFetch=fetch, assetFetch, gameServices=loadIntegrations(), catalog=games, marketplaceOptions={}}={}) {
  const games=catalog;
  mkdirSync(dataDir,{recursive:true,mode:0o700});
  const db=new DatabaseSync(path.join(dataDir,'platform.sqlite'));
