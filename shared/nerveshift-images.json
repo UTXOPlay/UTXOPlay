@@ -1,0 +1,19 @@
+{
+  "/assets/nerveshift-keyart.webp": [
+    {
+      "width": 320,
+      "url": "/assets/optimized-v1/nerveshift-keyart-w320-5df08d5c1ec8.webp",
+      "bytes": 10142
+    },
+    {
+      "width": 640,
+      "url": "/assets/optimized-v1/nerveshift-keyart-w640-053240d9e40d.webp",
+      "bytes": 27184
+    },
+    {
+      "width": 1280,
+      "url": "/assets/optimized-v1/nerveshift-keyart-w1280-e930d63a19d3.webp",
+      "bytes": 67976
+    }
+  ]
+}

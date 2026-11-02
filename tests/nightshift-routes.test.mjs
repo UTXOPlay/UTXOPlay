@@ -12,26 +12,28 @@ async function fixture(t){
 }
 test('legacy entry links and missing slash preserve launch tokens on the canonical URL',async t=>{
  const request=await fixture(t);
- for(const path of ['/games/drift-run','/games/drift-run/','/games/nightshift']){
+ for(const path of ['/games/drift-run','/games/drift-run/','/games/nightshift','/games/nightshift/','/games/nerveshift']){
   const response=await request(path+'?launch=drift-run%3A1&review=1');assert.equal(response.status,308);
-  assert.equal(response.headers.get('location'),'/games/nightshift/?launch=drift-run%3A1&review=1');
+  assert.equal(response.headers.get('location'),'/games/nerveshift/?launch=drift-run%3A1&review=1');
  }
  const head=await request('/games/drift-run/',{method:'HEAD'});assert.equal(head.status,308);assert.equal(await head.text(),'');
 });
 test('canonical pages, assets and API commands retain the existing game identity',async t=>{
  const request=await fixture(t);
  for(const suffix of ['/','/_arcade/car.glb?v=8.1.1','/api/state']){
-  const response=await request('/games/nightshift'+suffix);assert.equal(response.status,200);
-  const data=await response.json();assert.equal(data.game,'drift-run');assert.equal(data.path,suffix);assert.equal(data.original,'/games/nightshift'+suffix);
+  const response=await request('/games/nerveshift'+suffix);assert.equal(response.status,200);
+  const data=await response.json();assert.equal(data.game,'drift-run');assert.equal(data.path,suffix);assert.equal(data.original,'/games/nerveshift'+suffix);
  }
  const action={type:'upgrade',vehicle:0,choice:1};
- const response=await request('/games/nightshift/api/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(action)});
+ const response=await request('/games/nerveshift/api/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(action)});
  const data=await response.json();assert.equal(data.method,'POST');assert.equal(data.path,'/api/action');assert.deepEqual(data.body,action);
  assert.equal((await request('/games/drift-run/api/state')).status,200);
 });
-test('similar names and other games never enter the NIGHTSHIFT alias',async t=>{
+test('similar names and other games never enter the NerveShift alias',async t=>{
  const request=await fixture(t);
  for(const game of ['nightshift-other','chess','drift-coast']){
   const response=await request('/games/'+game+'/');assert.equal(response.status,200);assert.equal((await response.json()).game,game);
  }
 });
+
+test('previous brand assets and writes keep the original identity without redirecting POST',async t=>{const request=await fixture(t);for(const suffix of ['/_arcade/car.glb','/api/state']){const r=await request('/games/nightshift'+suffix);assert.equal(r.status,200);assert.equal((await r.json()).game,'drift-run');}const r=await request('/games/nightshift/api/action',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'ticks',inputs:[0]})});assert.equal(r.status,200);assert.deepEqual((await r.json()).body,{type:'ticks',inputs:[0]});});

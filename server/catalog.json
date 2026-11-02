@@ -156,18 +156,18 @@
   },
   {
     "id": "drift-run",
-    "title": "NIGHTSHIFT",
+    "title": "NerveShift",
     "subtitle": "Earn your crew. Build your line.",
     "genre": "Racing",
     "mode": "Single-player",
     "description": "Twelve winding courses, three campaign chapters and six cars. Race against rivals that share your driving physics. Read cover, counter energy attacks and intercept loaded couriers. Earn Relay Credits, unlock permanent parts and tune a six-point build.",
-    "cover": "/assets/nightshift-keyart.webp",
-    "version": "16.0.0",
+    "cover": "/assets/nerveshift-keyart.webp",
+    "version": "16.0.1",
     "controls": "W accelerates, S brakes, A/D steer, X handbrakes, Z reverses; all actions are remappable. Colemak and arrow pedals supported. Touch uses an analogue thumb stick. Standard controllers: RT gas, LT brake/reverse, B handbrake, A nitrous.",
     "players": "1 player",
     "headline": "Twelve roads.|Own your line.",
     "heroDescription": "Earn your crew license across three chapters. Reconfigure permanent purchased parts within a six-point budget, then carry your relay through twelve circuits. Finish with a clean drift exit or secure the final interception target and a podium. Solo racing with verified career carry.",
-    "caption": "NIGHTSHIFT · WORLD CIRCUIT",
+    "caption": "NERVESHIFT · WORLD CIRCUIT",
     "myelin": {
       "based": true,
       "version": "0.31.0",
@@ -188,9 +188,9 @@
       "length": "3–7 minute races",
       "input": "Keyboard + drag + joystick",
       "note": "Race. Counter. Carry the relay.",
-      "repo": "NIGHTSHIFT"
+      "repo": "NerveShift"
     },
-    "sourceUrl": "https://github.com/UTXOPlay/NIGHTSHIFT",
+    "sourceUrl": "https://github.com/UTXOPlay/NerveShift",
     "replayDescription": "V14 binds shared driver physics, rival tactics, clear-path EMP, relay couriers, builds and career rewards to its exact native application profile. Unfinished V8–V13 races keep their original executors until a new event explicitly carries the verified career forward. Historical PBs stay separate. Myelin provides off-chain host replay, not CKB settlement.",
     "tags": [
       "arcade",
