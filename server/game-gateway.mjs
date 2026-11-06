@@ -2,6 +2,7 @@ import {readFileSync} from 'node:fs';
 import {Readable} from 'node:stream';
 import {pipeline} from 'node:stream/promises';
 import {gameSockets} from './game-sockets.mjs';
+import {assetTransport} from './asset-transport.mjs';
 
 export function loadIntegrations(file=process.env.GAME_SERVICES_FILE||new URL('./game-services.json',import.meta.url)) {
  const entries=JSON.parse(readFileSync(file,'utf8'));
@@ -17,7 +18,7 @@ export function loadIntegrations(file=process.env.GAME_SERVICES_FILE||new URL('.
 
 // A configured game owns all browser assets, room logic and native rules.
 // The store supplies revocable identity and records generic play activity only.
-export function installGameGateway({app,services,account,needUser,limited,origin,runtimeFetch=fetch,assetFetch=fetch,recordPlay,recordActivity,knownAccount}) {
+export function installGameGateway({app,services,account,needUser,limited,origin,runtimeFetch=fetch,assetFetch=assetTransport,recordPlay,recordActivity,knownAccount}) {
  const streams=new Set();
  app.get('/api/items',async(req,res)=>{
   const user=account(req);
@@ -85,12 +86,13 @@ export function installGameGateway({app,services,account,needUser,limited,origin
   if(pathname.includes('\\')||pathname.split('/').some(p=>p==='..'||p==='.')||pathname.includes('\0'))return res.sendStatus(400);
   const controller=new AbortController(),close=()=>controller.abort();res.on('close',close);
   try{
-   const headers={};for(const name of ['range','if-none-match','if-modified-since'])if(req.headers[name])headers[name]=req.headers[name];
+   const headers={};for(const name of ['accept-encoding','range','if-range','if-none-match','if-modified-since'])if(req.headers[name])headers[name]=req.headers[name];
    const url=service.url+'/games/'+id+req.url;
    const upstream=await assetFetch(url,{method:req.method,headers,redirect:'manual',signal:AbortSignal.any([controller.signal,AbortSignal.timeout(20000)])});
    if(upstream.status>=300&&upstream.status<400&&upstream.status!==304)return res.status(502).send('Invalid game asset redirect');
    res.status(upstream.status);
-   for(const name of ['content-type','cache-control','etag','last-modified','content-range','accept-ranges']){const value=upstream.headers.get(name);if(value)res.set(name,value);}
+   for(const name of ['content-type','content-encoding','content-length','cache-control','etag','last-modified','content-range','accept-ranges']){const value=upstream.headers.get(name);if(value)res.set(name,value);}
+   const vary=upstream.headers.get('vary');if(vary)res.vary(vary);
    res.set('Content-Security-Policy',"default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; connect-src 'self'; object-src 'none'; frame-ancestors 'self'; base-uri 'none'; form-action 'none'");
    if(upstream.body&&req.method!=='HEAD')await pipeline(Readable.fromWeb(upstream.body),res,{signal:controller.signal});else res.end();
   }catch{if(!res.headersSent&&!res.destroyed)res.status(503).send('The game is unavailable. Please retry.');else res.end();}
